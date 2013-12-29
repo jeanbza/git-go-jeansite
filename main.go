@@ -1,6 +1,7 @@
 package main
 
 import (
+    "regexp"
     "bytes"
     "io/ioutil"
     "html/template"
@@ -43,9 +44,13 @@ func main() {
     checkError(err)
 }
 
-func loadPage(title string) (Post) {
-    filename := title + ".txt"
-    contentByte, err := ioutil.ReadFile(filename)
+func loadPage(fileName string) (Post) {
+    re := regexp.MustCompile("_([a-zA-Z0-9 ]+)")
+    title := re.FindAllStringSubmatch(fileName, -1)[0][1]
+
+    fmt.Printf("%v\n\n", title)
+
+    contentByte, err := ioutil.ReadFile(fileName)
     contentSplitBytes := bytes.Split(contentByte, []byte("\n"))
     var contentSplitString []string
 
@@ -62,8 +67,8 @@ func loadPage(title string) (Post) {
 }
 
 func blogPage(rw http.ResponseWriter, req *http.Request) {
-    somePost := loadPage("posts/20131228_Testpost")
-    someOtherPost := loadPage("posts/20131228_Testpost2")
+    somePost := loadPage("posts/20131228_Testpost.txt")
+    someOtherPost := loadPage("posts/20131228_Testpost2.txt")
 
     p := Page{
         Title: "blog",
