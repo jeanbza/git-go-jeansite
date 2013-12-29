@@ -8150,6 +8150,11 @@ th.hidden-lg, td.hidden-lg {
   margin: 0;
 }
 
+/* line 1, ../sass/ui_patterns/_paragraph.sass */
+.jdk-paragraph {
+  margin-bottom: 10px;
+}
+
 /* line 1, ../sass/modules/header/_header_module.sass */
 .jdk-header {
   border-radius: 0;

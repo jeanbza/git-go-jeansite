@@ -45,11 +45,11 @@ func main() {
 }
 
 func loadPage(fileName string) (Post) {
+    // Split the filename to get the title
     re := regexp.MustCompile("_([a-zA-Z0-9 ]+)")
     title := re.FindAllStringSubmatch(fileName, -1)[0][1]
 
-    fmt.Printf("%v\n\n", title)
-
+    // Read the file's contents
     contentByte, err := ioutil.ReadFile(fileName)
     contentSplitBytes := bytes.Split(contentByte, []byte("\n"))
     var contentSplitString []template.HTML
