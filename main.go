@@ -44,13 +44,13 @@ func main() {
     checkError(err)
 }
 
-func loadPage(fileName string) (Post) {
+func loadPage(filePath string) (Post) {
     // Split the filename to get the title
     re := regexp.MustCompile("_([a-zA-Z0-9 ]+)")
-    title := re.FindAllStringSubmatch(fileName, -1)[0][1]
+    title := re.FindAllStringSubmatch(filePath, -1)[0][1]
 
     // Read the file's contents
-    contentByte, err := ioutil.ReadFile(fileName)
+    contentByte, err := ioutil.ReadFile(filePath)
     contentSplitBytes := bytes.Split(contentByte, []byte("\n"))
     var contentSplitString []template.HTML
 
@@ -68,14 +68,16 @@ func loadPage(fileName string) (Post) {
 
 func blogPage(rw http.ResponseWriter, req *http.Request) {
     var posts []Post
-    var buffer bytes.Buffer
+    var filePath bytes.Buffer
+
+    // Grabs all posts in the posts directory, loads them into a Page struct, and appends to the posts array
     postPaths, _ := ioutil.ReadDir("posts")
     
     for _, element := range postPaths {
-        buffer.Reset()
-        buffer.WriteString("posts/")
-        buffer.WriteString(element.Name())
-        posts = append(posts, loadPage(buffer.String()))
+        filePath.Reset()
+        filePath.WriteString("posts/")
+        filePath.WriteString(element.Name())
+        posts = append(posts, loadPage(filePath.String()))
     }
 
     p := Page{
