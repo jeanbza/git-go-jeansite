@@ -1,6 +1,7 @@
 package main
 
 import (
+    "io/ioutil"
     "html/template"
     "net/http"
     "os"
@@ -41,22 +42,28 @@ func main() {
     checkError(err)
 }
 
+func loadPage(title string) (Post) {
+    filename := title + ".txt"
+    contentByte, err := ioutil.ReadFile(filename)
+    contentString := string(contentByte)
+    
+    if err != nil {
+        fmt.Println("Fatal error ", err.Error())
+        os.Exit(1)
+    }
+
+    return Post{Title: title, Content: contentString}
+}
+
 func blogPage(rw http.ResponseWriter, req *http.Request) {
+    somePost := loadPage("posts/20131228_Testpost")
+    someOtherPost := loadPage("posts/20131228_Testpost2")
+
     p := Page{
         Title: "blog",
         Posts: []Post{
-            Post{
-                Title: "Test blog title 1",
-                Content: "Test blog content 1",
-            },
-            Post{
-                Title: "Test blog title 2",
-                Content: "Test blog content 2",
-            },
-            Post{
-                Title: "Test blog title THE LAST",
-                Content: "Test blog content BOOM THE LAST",
-            },
+            somePost,
+            someOtherPost,
         },
     }
 
