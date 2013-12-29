@@ -5,7 +5,11 @@
         <div class="row">
             <h2>{{.Title}}</h2>
             <div>
-                {{.Content}}
+                {{range .Paragraphs}}
+                	<div>
+                		{{.}}
+                	</div>
+                {{end}}
             </div>
         </div>
     {{end}}

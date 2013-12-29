@@ -1,6 +1,7 @@
 package main
 
 import (
+    "bytes"
     "io/ioutil"
     "html/template"
     "net/http"
@@ -15,7 +16,7 @@ type Page struct {
 
 type Post struct {
     Title   string
-    Content string
+    Paragraphs []string
 }
 
 func main() {
@@ -45,14 +46,19 @@ func main() {
 func loadPage(title string) (Post) {
     filename := title + ".txt"
     contentByte, err := ioutil.ReadFile(filename)
-    contentString := string(contentByte)
-    
+    contentSplitBytes := bytes.Split(contentByte, []byte("\n"))
+    var contentSplitString []string
+
     if err != nil {
         fmt.Println("Fatal error ", err.Error())
         os.Exit(1)
     }
 
-    return Post{Title: title, Content: contentString}
+    for _, element := range contentSplitBytes {
+        contentSplitString = append(contentSplitString, string(element))
+    }
+
+    return Post{Title: title, Paragraphs: contentSplitString}
 }
 
 func blogPage(rw http.ResponseWriter, req *http.Request) {
