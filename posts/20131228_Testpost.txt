@@ -1,1 +1,5 @@
 This is a test post from a .txt file
+
+<code>this is some code</code>
+
+boom bam

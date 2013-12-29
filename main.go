@@ -17,7 +17,7 @@ type Page struct {
 
 type Post struct {
     Title   string
-    Paragraphs []string
+    Paragraphs []template.HTML
 }
 
 func main() {
@@ -52,7 +52,7 @@ func loadPage(fileName string) (Post) {
 
     contentByte, err := ioutil.ReadFile(fileName)
     contentSplitBytes := bytes.Split(contentByte, []byte("\n"))
-    var contentSplitString []string
+    var contentSplitString []template.HTML
 
     if err != nil {
         fmt.Println("Fatal error ", err.Error())
@@ -60,7 +60,7 @@ func loadPage(fileName string) (Post) {
     }
 
     for _, element := range contentSplitBytes {
-        contentSplitString = append(contentSplitString, string(element))
+        contentSplitString = append(contentSplitString, template.HTML(string(element)))
     }
 
     return Post{Title: title, Paragraphs: contentSplitString}
