@@ -31,7 +31,10 @@ func main() {
     http.HandleFunc("/contact", contactPage)
     http.HandleFunc("/contact/", contactPage)
 
-    fileServer := http.StripPrefix("/css/", http.FileServer(http.Dir("css")))
+    fileServer := http.StripPrefix("/fonts/", http.FileServer(http.Dir("fonts")))
+    http.Handle("/fonts/", fileServer)
+
+    fileServer = http.StripPrefix("/css/", http.FileServer(http.Dir("css")))
     http.Handle("/css/", fileServer)
 
     fileServer = http.StripPrefix("/js/", http.FileServer(http.Dir("js")))
