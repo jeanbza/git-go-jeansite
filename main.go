@@ -67,15 +67,20 @@ func loadPage(fileName string) (Post) {
 }
 
 func blogPage(rw http.ResponseWriter, req *http.Request) {
-    somePost := loadPage("posts/20131228_Testpost.txt")
-    someOtherPost := loadPage("posts/20131228_Testpost2.txt")
+    var posts []Post
+    var buffer bytes.Buffer
+    postPaths, _ := ioutil.ReadDir("posts")
+    
+    for _, element := range postPaths {
+        buffer.Reset()
+        buffer.WriteString("posts/")
+        buffer.WriteString(element.Name())
+        posts = append(posts, loadPage(buffer.String()))
+    }
 
     p := Page{
         Title: "blog",
-        Posts: []Post{
-            somePost,
-            someOtherPost,
-        },
+        Posts: posts,
     }
 
     tmpl := make(map[string]*template.Template)
