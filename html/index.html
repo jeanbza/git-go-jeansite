@@ -11,7 +11,7 @@
         <link rel="stylesheet" type="text/css" href="css/app.css">
     </head>
     <body>
-        <div class="container">
+        <div class="container jdk-main">
             <nav class="navbar navbar-default jdk-header" role="navigation">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
@@ -37,9 +37,10 @@
 
             {{template "body" .}}
 
-            <nav class="navbar navbar-default navbar-fixed-bottom jdk-footer" role="footer">
-                <small><a href="mailto:jadekler@gmail.com">jadekler@gmail.com</a></small>
-            </nav>
+            <div class="jdk-footer-root"></div>
+        </div>
+        <div class="jdk-footer">
+            <small><a href="mailto:jadekler@gmail.com">jadekler@gmail.com</a></small>
         </div>
     </body>
 </html>

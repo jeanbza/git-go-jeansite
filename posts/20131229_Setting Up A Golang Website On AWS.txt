@@ -1,0 +1,45 @@
+<div class="jdk-paragraph">
+    It should come as no surprise that the first post will talk about how this website is written, and how you can do the same. Keep in mind that this post is being written in the present - future iterations of the site may look different, but this is a solid place to start. Also, for this post I will provide only a summary - not a full explanation. So to start, let's briefly take a look at the tools we'll be using to get this up on its feet:
+</div>
+<ul>
+    <li><a target="_blank" href="http://aws.amazon.com/">AWS EC2</a>: Our VM that acts as our server</li>
+    <li><a target="_blank" href="http://www.name.com/">Name.com</a>: The domain registrar for jeandeklerk.com</li>
+    <li><a target="_blank" href="http://golang.org/">Golang</a>: The server-side programming language we'll be using. We'll also be using the built in http server and templating systems</li>
+    <li><a target="_blank" href="http://sass-lang.com/">Sass</a>: The pre-compilation we'll be using for our css</li>
+    <li><a target="_blank" href="http://getbootstrap.com/">Twitter Bootstrap</a>: Some sexy pre-built CSS and JS</li>
+    <li><a target="_blank" href="http://fontawesome.io/">Font-Awesome</a>: For awesome fonts, as the name implies</li>
+    <li><a target="_blank" href="http://jquery.com/">jQuery</a>: For javascript goodness</li>
+</ul>
+<div class="jdk-paragraph">
+    I'll try and keep this brief and ordered. Here are the steps to walk through:
+</div>
+<ol>
+    <li>Install Git: <a href="https://help.github.com/articles/set-up-git">https://help.github.com/articles/set-up-git</a></li>
+    <li>Install Go: <a href="http://golang.org/doc/install">http://golang.org/doc/install</a></li>
+    <li>
+        <ul>
+            <li>Either step through the Golang <a target="_blank" href="http://golang.org/doc/articles/wiki/">'Writing Web Applications'</a> tutorial</li>
+            <li>Or grab my completed code at <a target="_blank" href="https://github.com/jadekler/git-go-jeansite/tree/0de39c59b638c8ba74885d5d7126d968253204aa">my Github Repo</a></li>
+        </ul>
+    </li>
+    <li>
+        Fire up your server!
+        <code>go build main.go
+            ./main
+            http://localhost:8080
+        </code>
+        Again, for the sake of brevity I'm skipping a lot. If you're here and the above hasn't worked for you I suggest stepping through the aforementioned tutorial. It has all you need to get off the ground.
+    </li>
+    <li>
+        So you have a server but you don't have anywhere to put it. This is where AWS EC2 comes in. Once again, here is a very helpful guide: <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EC2_GetStarted.html">Getting Started with Amazon EC2 Linux Instances</a>. Walk through steps 1-4 to get an instance running, 
+    </li>
+    <li>
+        Install Golang and Git on your EC2 instance as before and pull your repo down to your server.
+    </li>
+    <li>
+        Now you have an AWS EC2 instance with running (go) server code, but we still need to be able to access it. This instance has a Dynamic IP - it changes periodically. Not useful to use. We need to assign a static IP. Under the left panel of the EC2 console you should see a link called 'Elastic IPs'. Click this and allocate a new address to your EC2 instance.
+    </li>
+    <li>
+        Now we have an EC2 instance with server code running and a static IP pointing to it. Great! Last step, which is entirely optional: go to <a target="_blank" href="name.com">name.com</a> and register a domain name (it may cost $5+ for a year or so). Once that's done, create a CNAME record that points to your static IP. Here is yet another, more-detailed <a target="_blank" href="http://www.name.com/blog/general/development/2012/01/so-you-want-free-web-hosting-an-amazon-ec2-how-to/">guide for this process</a>.
+    </li>
+</ol>

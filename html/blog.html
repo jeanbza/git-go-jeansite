@@ -4,11 +4,7 @@
             <h2 class="jdk-title">{{.Title}}</h2>
             <h5 class="jdk-date"><small>Posted {{.Date}}</small></h5>
             <div class="jdk-paragraphs">
-                {{range .Paragraphs}}
-                	<div class="jdk-paragraph">
-                		{{.}}
-                	</div>
-                {{end}}
+                {{.Content}}
             </div>
         </div>
     {{end}}

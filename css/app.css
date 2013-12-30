@@ -8389,7 +8389,10 @@ th.hidden-lg, td.hidden-lg {
   margin: 0;
 }
 
-.jdk-paragraph {
+code {
+  display: block;
+  white-space: pre-line;
+  margin-top: 10px;
   margin-bottom: 10px;
 }
 
@@ -8402,12 +8405,35 @@ th.hidden-lg, td.hidden-lg {
   border-bottom: 1px solid #e7e7e7;
 }
 
+html, body {
+  height: 100%;
+}
+
+.jdk-main {
+  clear: both;
+  min-height: 100%;
+  height: auto !important;
+  height: 100%;
+  margin-bottom: -30px;
+}
+.jdk-main .jdk-footer-root {
+  height: 30px;
+}
+
+.jdk-footer {
+  clear: both;
+  position: relative;
+  height: 30px;
+}
+
 .jdk-footer {
   text-align: center;
-  padding-top: 15px;
+  padding-top: 5px;
+  border-top: 1px solid #e7e7e7;
 }
 
 .jdk-post .jdk-title {
+  margin-top: 0;
   margin-bottom: 0;
 }
 .jdk-post .jdk-date {
@@ -8416,4 +8442,8 @@ th.hidden-lg, td.hidden-lg {
 }
 .jdk-post .jdk-paragraphs .jdk-paragraph {
   margin-bottom: 10px;
+}
+
+.jdk-main {
+  padding-bottom: 20px;
 }

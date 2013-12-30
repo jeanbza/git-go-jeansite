@@ -18,7 +18,7 @@ type Page struct {
 type Post struct {
     Title      string
     Date       string
-    Paragraphs []template.HTML
+    Content    template.HTML
 }
 
 func main() {
@@ -28,9 +28,6 @@ func main() {
 
     http.HandleFunc("/about", aboutPage)
     http.HandleFunc("/about/", aboutPage)
-
-    http.HandleFunc("/contact", contactPage)
-    http.HandleFunc("/contact/", contactPage)
 
     fileServer := http.StripPrefix("/fonts/", http.FileServer(http.Dir("fonts")))
     http.Handle("/fonts/", fileServer)
@@ -72,19 +69,11 @@ func loadPage(filePath string) (Post) {
 
     // Read the file's contents
     contentByte, err := ioutil.ReadFile(filePath)
-    contentSplitBytes := bytes.Split(contentByte, []byte("\n"))
-    var contentSplitString []template.HTML
+    contentHTML := template.HTML(string(contentByte))
 
-    if err != nil {
-        fmt.Println("Fatal error ", err.Error())
-        os.Exit(1)
-    }
+    checkError(err)
 
-    for _, element := range contentSplitBytes {
-        contentSplitString = append(contentSplitString, template.HTML(string(element)))
-    }
-
-    return Post{Title: title, Date: dateString.String(), Paragraphs: contentSplitString}
+    return Post{Title: title, Date: dateString.String(), Content: contentHTML}
 }
 
 func blogPage(rw http.ResponseWriter, req *http.Request) {
@@ -121,17 +110,6 @@ func aboutPage(rw http.ResponseWriter, req *http.Request) {
     tmpl := make(map[string]*template.Template)
     tmpl["about.html"] = template.Must(template.ParseFiles("html/about.html", "html/index.html"))
     tmpl["about.html"].ExecuteTemplate(rw, "base", p)
-}
-
-func contactPage(rw http.ResponseWriter, req *http.Request) {
-    p := Page{
-        Title: "contact",
-        Posts: nil,
-    }
-
-    tmpl := make(map[string]*template.Template)
-    tmpl["contact.html"] = template.Must(template.ParseFiles("html/contact.html", "html/index.html"))
-    tmpl["contact.html"].ExecuteTemplate(rw, "base", p)
 }
 
 func checkError(err error) {
