@@ -1,8 +1,9 @@
 {{define "body"}}
     {{range .Posts}}
-        <div class="row">
-            <h2>{{.Title}}</h2>
-            <div>
+        <div class="row jdk-post">
+            <h2 class="jdk-title">{{.Title}}</h2>
+            <h5 class="jdk-date"><small>Posted {{.Date}}</small></h5>
+            <div class="jdk-paragraphs">
                 {{range .Paragraphs}}
                 	<div class="jdk-paragraph">
                 		{{.}}

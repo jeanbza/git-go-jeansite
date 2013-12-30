@@ -16,7 +16,8 @@ type Page struct {
 }
 
 type Post struct {
-    Title   string
+    Title      string
+    Date       string
     Paragraphs []template.HTML
 }
 
@@ -48,8 +49,25 @@ func main() {
 }
 
 func loadPage(filePath string) (Post) {
+    // Split the filename to get the date
+    var dateString bytes.Buffer 
+    
+    re := regexp.MustCompile("/[0-9]{6}([0-9]{2})_.*")
+    day := re.FindAllStringSubmatch(filePath, -1)[0][1]
+    dateString.WriteString(day)
+    dateString.WriteString("-")
+
+    re = regexp.MustCompile("/[0-9]{4}([0-9]{2})[0-9]{2}_.*")
+    month := re.FindAllStringSubmatch(filePath, -1)[0][1]
+    dateString.WriteString(month)
+    dateString.WriteString("-")
+
+    re = regexp.MustCompile("/([0-9]{4})[0-9]{4}_.*")
+    year := re.FindAllStringSubmatch(filePath, -1)[0][1]
+    dateString.WriteString(year)
+
     // Split the filename to get the title
-    re := regexp.MustCompile("_(.+).txt")
+    re = regexp.MustCompile("_(.+).txt")
     title := re.FindAllStringSubmatch(filePath, -1)[0][1]
 
     // Read the file's contents
@@ -66,7 +84,7 @@ func loadPage(filePath string) (Post) {
         contentSplitString = append(contentSplitString, template.HTML(string(element)))
     }
 
-    return Post{Title: title, Paragraphs: contentSplitString}
+    return Post{Title: title, Date: dateString.String(), Paragraphs: contentSplitString}
 }
 
 func blogPage(rw http.ResponseWriter, req *http.Request) {

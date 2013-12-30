@@ -8406,3 +8406,14 @@ th.hidden-lg, td.hidden-lg {
   text-align: center;
   padding-top: 15px;
 }
+
+.jdk-post .jdk-title {
+  margin-bottom: 0;
+}
+.jdk-post .jdk-date {
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+.jdk-post .jdk-paragraphs .jdk-paragraph {
+  margin-bottom: 10px;
+}
