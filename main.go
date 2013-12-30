@@ -49,7 +49,7 @@ func main() {
 
 func loadPage(filePath string) (Post) {
     // Split the filename to get the title
-    re := regexp.MustCompile("_([a-zA-Z0-9 ]+)")
+    re := regexp.MustCompile("_(.+).txt")
     title := re.FindAllStringSubmatch(filePath, -1)[0][1]
 
     // Read the file's contents
@@ -76,7 +76,8 @@ func blogPage(rw http.ResponseWriter, req *http.Request) {
     // Grabs all posts in the posts directory, loads them into a Page struct, and appends to the posts array
     postPaths, _ := ioutil.ReadDir("posts")
     
-    for _, element := range postPaths {
+    for i := len(postPaths)-1; i >= 0; i-- {
+        element := postPaths[i]
         filePath.Reset()
         filePath.WriteString("posts/")
         filePath.WriteString(element.Name())

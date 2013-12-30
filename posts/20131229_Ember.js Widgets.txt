@@ -1,0 +1,1 @@
+This is a stub for Ember.js Widgets blog post.
