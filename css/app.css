@@ -8404,6 +8404,22 @@ code {
   border-right: 0;
   border-bottom: 1px solid #e7e7e7;
 }
+@media screen and (max-width: 767px) {
+  .jdk-header .jdk-icon {
+    display: none;
+  }
+  .jdk-header .jdk-text {
+    display: block;
+  }
+}
+@media screen and (min-width: 767px) {
+  .jdk-header .jdk-icon {
+    display: block;
+  }
+  .jdk-header .jdk-text {
+    display: none;
+  }
+}
 
 html, body {
   height: 100%;
