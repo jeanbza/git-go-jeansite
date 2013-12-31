@@ -19,7 +19,9 @@
     <li>
         <ul>
             <li>Either step through the Golang <a target="_blank" href="http://golang.org/doc/articles/wiki/">'Writing Web Applications'</a> tutorial</li>
-            <li>Or grab my completed code at <a target="_blank" href="https://github.com/jadekler/git-go-jeansite/tree/0de39c59b638c8ba74885d5d7126d968253204aa">my Github Repo</a></li>
+            <li>
+                Or grab my completed code at <a target="_blank" href="https://github.com/jadekler/git-go-jeansite/tree/0de39c59b638c8ba74885d5d7126d968253204aa">my Github Repo</a>
+            </li>
         </ul>
     </li>
     <li>

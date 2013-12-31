@@ -16,6 +16,7 @@ type Page struct {
 }
 
 type Post struct {
+    FileName   string
     Title      string
     Date       string
     Content    template.HTML
@@ -45,11 +46,42 @@ func main() {
     checkError(err)
 }
 
-func loadPage(filePath string) (Post) {
-    // Split the filename to get the date
-    var dateString bytes.Buffer 
+func loadPage(filePath string, fullPost bool) (Post) {
+    // Split the filepath to get the filename
+    re := regexp.MustCompile("/(.+).txt")
+    fileName := re.FindAllStringSubmatch(filePath, -1)[0][1]
+
+    // Read the file's contents
+    contentByte, err := ioutil.ReadFile(filePath)
+    var contentString bytes.Buffer
+
+    if err != nil {
+        return Post{}
+    }
+
+    if (!fullPost) {
+        var contentByteTrimmed []byte
+
+        for index, element := range contentByte {
+            if (index < 120) {
+                contentByteTrimmed = append(contentByteTrimmed, element)
+            }
+        }
+
+        contentString.WriteString(string(contentByteTrimmed))
+        contentString.WriteString(".. <a href='/blog/")
+        contentString.WriteString(fileName)
+        contentString.WriteString("'><small>Read more</small></a></div>")
+    } else {
+        contentString.WriteString(string(contentByte))
+    }
+
+    contentHTML := template.HTML(contentString.String())
+
+    // Split the filepath to get the date
+    var dateString bytes.Buffer
     
-    re := regexp.MustCompile("/[0-9]{6}([0-9]{2})_.*")
+    re = regexp.MustCompile("/[0-9]{6}([0-9]{2})_.*")
     day := re.FindAllStringSubmatch(filePath, -1)[0][1]
     dateString.WriteString(day)
     dateString.WriteString("-")
@@ -63,32 +95,42 @@ func loadPage(filePath string) (Post) {
     year := re.FindAllStringSubmatch(filePath, -1)[0][1]
     dateString.WriteString(year)
 
-    // Split the filename to get the title
+    // Split the filepath to get the title
     re = regexp.MustCompile("_(.+).txt")
     title := re.FindAllStringSubmatch(filePath, -1)[0][1]
 
-    // Read the file's contents
-    contentByte, err := ioutil.ReadFile(filePath)
-    contentHTML := template.HTML(string(contentByte))
-
     checkError(err)
 
-    return Post{Title: title, Date: dateString.String(), Content: contentHTML}
+    return Post{FileName: fileName, Title: title, Date: dateString.String(), Content: contentHTML}
 }
 
 func blogPage(rw http.ResponseWriter, req *http.Request) {
     var posts []Post
     var filePath bytes.Buffer
 
-    // Grabs all posts in the posts directory, loads them into a Page struct, and appends to the posts array
-    postPaths, _ := ioutil.ReadDir("posts")
+    re := regexp.MustCompile("/blog/(.+)")
+    matches := re.FindAllStringSubmatch(req.URL.Path, -1)
     
-    for i := len(postPaths)-1; i >= 0; i-- {
-        element := postPaths[i]
-        filePath.Reset()
+    if (matches == nil) {
+        // Grabs all posts in the posts directory, loads them into a Page struct, and appends to the posts array
+        postPaths, _ := ioutil.ReadDir("posts")
+        
+        for i := len(postPaths)-1; i >= 0; i-- {
+            element := postPaths[i]
+            filePath.Reset()
+            filePath.WriteString("posts/")
+            filePath.WriteString(element.Name())
+            posts = append(posts, loadPage(filePath.String(), false))
+        }
+    } else {
+        // Grabs specific post
+        post := matches[0][1]
+
         filePath.WriteString("posts/")
-        filePath.WriteString(element.Name())
-        posts = append(posts, loadPage(filePath.String()))
+        filePath.WriteString(post)
+        filePath.WriteString(".txt")
+
+        posts = append(posts, loadPage(filePath.String(), true))
     }
 
     p := Page{
