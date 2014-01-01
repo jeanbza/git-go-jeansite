@@ -8,8 +8,11 @@ You will need:
 - Git
 
 To build:
+
 go build main.go
 
 To run:
+
 ./main
+
 http://localhost::8080
