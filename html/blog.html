@@ -1,15 +1,11 @@
 {{define "body"}}
-    {{range .Posts}}
-        <div class="row jdk-post">
-            {{if eq .Title ""}}
-                <div>Sorry, post not found.</div>
-            {{else}}
-                <h2 class="jdk-title"><a href="/blog/{{.FileName}}">{{.Title}}</a></h2>
-                <h5 class="jdk-date"><small>Posted {{.Date}}</small></h5>
-                <div class="jdk-paragraphs">
-                    {{.Content}}
-                </div>
-            {{end}}
-        </div>
+    {{if .SinglePost}}
+        {{template "post" .Post}}
+    {{else}}
+        {{range .Posts}}
+            <div class="row jdk-post">
+                {{template "post" .}}
+            </div>
+        {{end}}
     {{end}}
 {{end}}

@@ -16,47 +16,75 @@ type Post struct {
     Content    template.HTML
 }
 
-type Page struct {
-    Title string
-    Posts []Post
-}
-
 func GetPage(rw http.ResponseWriter, req *http.Request) {
-    var posts []Post
-    var filePath bytes.Buffer
-
     re := regexp.MustCompile("/blog/(.+)")
     matches := re.FindAllStringSubmatch(req.URL.Path, -1)
-    
-    if (matches == nil) {
+    fullPost := matches == nil
+
+    if (fullPost) {
         // Grabs all posts in the posts directory, loads them into a Page struct, and appends to the posts array
-        postPaths, _ := ioutil.ReadDir("posts")
-        
-        for i := len(postPaths)-1; i >= 0; i-- {
-            element := postPaths[i]
-            filePath.Reset()
-            filePath.WriteString("posts/")
-            filePath.WriteString(element.Name())
-            posts = append(posts, loadPage(filePath.String(), false))
-        }
+        loadPosts(rw)
     } else {
         // Grabs specific post
-        post := matches[0][1]
+        postTitle := matches[0][1]
+        loadPost(rw, postTitle)
+    }
+}
 
+func loadPost(rw http.ResponseWriter, postTitle string) {
+    var filePath bytes.Buffer
+
+    type Page struct {
+        Title       string
+        Post        Post
+        SinglePost  bool
+    }
+
+    filePath.WriteString("posts/")
+    filePath.WriteString(postTitle)
+    filePath.WriteString(".txt")
+
+    post := loadPage(filePath.String(), true)
+
+    p := Page{
+        Title: "blog",
+        Post: post,
+        SinglePost: true,
+    }
+
+    tmpl := make(map[string]*template.Template)
+    tmpl["blog.html"] = template.Must(template.ParseFiles("html/post.html", "html/blog.html", "html/index.html"))
+    tmpl["blog.html"].ExecuteTemplate(rw, "base", p)
+}
+
+func loadPosts(rw http.ResponseWriter) {
+    var filePath bytes.Buffer
+    var posts []Post
+
+    type Page struct {
+        Title       string
+        Posts       []Post
+        SinglePost  bool
+    }
+
+    postPaths, _ := ioutil.ReadDir("posts")
+    
+    for i := len(postPaths)-1; i >= 0; i-- {
+        element := postPaths[i]
+        filePath.Reset()
         filePath.WriteString("posts/")
-        filePath.WriteString(post)
-        filePath.WriteString(".txt")
-
-        posts = append(posts, loadPage(filePath.String(), true))
+        filePath.WriteString(element.Name())
+        posts = append(posts, loadPage(filePath.String(), false))
     }
 
     p := Page{
         Title: "blog",
         Posts: posts,
+        SinglePost: false,
     }
 
     tmpl := make(map[string]*template.Template)
-    tmpl["blog.html"] = template.Must(template.ParseFiles("html/blog.html", "html/index.html"))
+    tmpl["blog.html"] = template.Must(template.ParseFiles("html/post.html", "html/blog.html", "html/index.html"))
     tmpl["blog.html"].ExecuteTemplate(rw, "base", p)
 }
 
