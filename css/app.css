@@ -8460,19 +8460,6 @@ html, body {
   margin-bottom: 10px;
 }
 
-iframe#twitter-widget-0 {
-  height: 800px;
-}
-iframe#twitter-widget-0 .root {
-  border: none;
-}
-iframe#twitter-widget-0 .root .time-line-header {
-  display: none;
-}
-iframe#twitter-widget-0 .root .timeline-footer {
-  display: none;
-}
-
 .jdk-main {
   padding-bottom: 20px;
 }
