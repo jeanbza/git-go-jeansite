@@ -1,0 +1,226 @@
+<div class="jdk-paragraph">
+    Let's take a look at an easy way to create some pretty cool widgets with Ember.js.
+
+    <script type="text/x-handlebars" data-template-name="widget">
+        <div class="container-fluid widget span5">
+            <div class="row-fluid titlebar">
+                <div class="span4 title">
+                    {{view.title}}
+                </div>
+                <div class="span8 buttons">
+                    <button {{action switchMode view}} class="btn">
+                        {{#if view.graphMode}}
+                            <i class="icon-th-list"></i>
+                        {{else}}
+                            <i class="icon-chevron-left"></i>
+                        {{/if}}
+                    </button>
+                </div>
+            </div>
+
+            <div class="graphHere">
+            </div>
+            {{#unless view.graphMode}}
+                <table class="content table">
+                    <thead>
+                        <tr>
+                            <td>Cost Center</td>
+                            <td>Jan</td>
+                            <td>Feb</td>
+                            <td>Mar</td>
+                            <td>Apr</td>
+                            <td>May</td>
+                            <td>Jun</td>
+                            <td>Jul</td>
+                            <td>Aug</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{#each costcenter in view.data}}
+                            <tr>
+                                <td>{{costcenter.title}} </td>
+                                {{#each value in costcenter.content}}
+                                    <td>{{value}}</td>
+                                {{/each}}
+                            </tr>
+                        {{/each}}
+                    <tbody>
+                </table>
+            {{/unless}}
+        </div>
+    </script>
+
+    <script type="text/x-handlebars">
+        <div class="ember-widget-demo">
+            {{#each widget in App.Widgets.items}}
+                {{view widget}}
+            {{/each}}
+        </div>
+    </script>
+</div>
+
+<script type="text/javascript" src="/js/ember/handlebars-1.1.2.js"></script>
+<script type="text/javascript" src="/js/ember/ember-1.2.0.js"></script>
+<script type="text/javascript" src="/js/highcharts/highcharts.js"></script>
+
+<script type="text/javascript">
+// INIT
+
+window.App = Ember.Application.create();
+
+// MODEL
+
+App.Widgets = Ember.ArrayController.create({
+    items: []
+});
+
+// VIEW
+
+App.CostCenter = Ember.Object.extend({
+    title: "default",
+    content: null
+});
+
+App.Widget = Ember.View.extend({
+    templateName: "widget",
+    someArr: [1,5,3],
+    title: "CTL",
+    graphElem: ".graphHere",
+    graphMode: true,
+
+    didInsertElement: function() {
+        this.graphData();
+    },
+
+    switchMode: function() {
+        this.set("graphMode", !this.graphMode);
+        if(this.graphMode) {
+            this.graphData();
+        } else {
+            this.$().find(this.graphElem).empty();
+        }
+    },
+
+    graphData: function() {
+        var self = this;
+        var data = [];
+        var graphClass = "graphArea";
+
+        $(document).ready(function() {
+            self.$().find(self.graphElem).append("<div class='"+graphClass+"'></div>");
+
+            $(self.data).each(function(){
+                var datum = {name: this.title, data: this.content};
+                data.push(datum);
+            });
+
+            self.$().find("."+graphClass).highcharts({
+                title: {
+                    text: 'Scores',
+                    x: -20
+                },
+                xAxis: {
+                    categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug'],
+                    labels: {
+                        rotation: -45
+                    }
+                },
+                yAxis: {
+                    title: {
+                        text: 'Score'
+                    },
+                    plotLines: [{
+                        value: 0,
+                        width: 1,
+                        color: '#808080'
+                    }]
+                },
+                legend: {
+                    layout: 'vertical',
+                    align: 'right',
+                    verticalAlign: 'middle',
+                    borderWidth: 0
+                },
+                series: data
+            });
+        });
+    }
+});
+
+// CONTROLLER
+
+App.ApplicationController = Ember.Controller.extend({
+    init: function() {
+        var self = this;
+        
+        for(var x = 0; x < 4; x++) {
+            var tempView = App.Widget.create({
+                data: Ember.makeArray([
+                    App.CostCenter.create({title: "Group A", content: self.getRandomArr(8)}),
+                    App.CostCenter.create({title: "Group B", content: self.getRandomArr(8)}),
+                    App.CostCenter.create({title: "Group C", content: self.getRandomArr(8)})
+                ]),
+            });
+            App.Widgets.items.pushObject(tempView);
+        }
+    },
+
+    getRandomArr: function(size) {
+        var randomArr = [];
+
+        for(var x = 0; x < size; x++) {
+            randomArr.push(this.getRandomInt(0, 10));
+        }
+
+        return randomArr;
+    },
+
+    getRandomInt: function(min, max) {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+    },
+
+    switchMode: function(view) {
+        view.switchMode();
+    }
+});
+</script>
+
+<style>
+    .ember-widget-demo .table {
+      margin: 0;
+    }
+
+    .ember-widget-demo .widget {
+      border: 1px solid #c8c9c7;
+      border-radius: 4px;
+      padding: 0;
+    }
+
+    .ember-widget-demo .widget .titlebar {
+      border-bottom: 1px solid #c8c9c7;
+    }
+
+    .ember-widget-demo .widget .titlebar .buttons button {
+      height: 30px;
+      border-top-left-radius: 0px;
+      border-bottom-left-radius: 0px;
+      float: right;
+      border-left: 1px solid #c8c9c7;
+      border-right: none;
+      border-top: none;
+      border-bottom: none;
+      background-color: white;
+      box-shadow: none;
+      background-image: none;
+    }
+
+    .ember-widget-demo .widget .titlebar .title {
+      padding-top: 3px;
+      padding-bottom: 3px;
+    }
+
+    .ember-widget-demo .widget .titlebar .title, .widget .titlebar .buttons {
+      padding-right: 5px;
+      padding-left: 5px;
+    }
+</style>
