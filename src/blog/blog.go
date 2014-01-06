@@ -121,6 +121,9 @@ func loadPage(filePath string, fullPost bool) (Post) {
     return Post{FileName: fileName, Title: parseFilePathForTitle(filePath), Date: parseFilePathForDate(filePath), Content: contentHTML, OneOfMany: !fullPost}
 }
 
+/**
+ * Splits file path for file name
+ */
 func parseFilePathForFileName(filePath string) (string) {
     re := regexp.MustCompile("/(.+).txt")
     fileName := re.FindAllStringSubmatch(filePath, -1)[0][1]
@@ -128,6 +131,9 @@ func parseFilePathForFileName(filePath string) (string) {
     return fileName
 }
 
+/**
+ * Splits the file path for title
+ */
 func parseFilePathForTitle(filePath string) (string) {
     re := regexp.MustCompile("_(.+).txt")
     title := re.FindAllStringSubmatch(filePath, -1)[0][1]
@@ -136,23 +142,23 @@ func parseFilePathForTitle(filePath string) (string) {
 }
 
 /**
- * Splits the file path for its date
+ * Splits the file path for date
  */
 func parseFilePathForDate(filePath string) (string) {
     var dateString bytes.Buffer
     
-    re := regexp.MustCompile("/[0-9]{6}([0-9]{2})_.*")
-    day := re.FindAllStringSubmatch(filePath, -1)[0][1]
+    re := regexp.MustCompile("/([0-9]{4})([0-9]{2})([0-9]{2})_.*")
+    result := re.FindAllStringSubmatch(filePath, -1)
+    
+    day := result[0][3]
     dateString.WriteString(day)
     dateString.WriteString("-")
 
-    re = regexp.MustCompile("/[0-9]{4}([0-9]{2})[0-9]{2}_.*")
-    month := re.FindAllStringSubmatch(filePath, -1)[0][1]
+    month := result[0][2]
     dateString.WriteString(month)
     dateString.WriteString("-")
 
-    re = regexp.MustCompile("/([0-9]{4})[0-9]{4}_.*")
-    year := re.FindAllStringSubmatch(filePath, -1)[0][1]
+    year := result[0][1]
     dateString.WriteString(year)
 
     return dateString.String()
