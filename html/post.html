@@ -2,7 +2,11 @@
     {{if eq .Title ""}}
         <div>Sorry, post not found.</div>
     {{else}}
-        <h2 class="jdk-title"><a href="/blog/{{.FileName}}">{{.Title}}</a></h2>
+    	{{if .OneOfMany}}
+    		<h2 class="jdk-title"><a href="/blog/{{.FileName}}">{{.Title}}</a></h2>
+    	{{else}}
+    		<h2 class="jdk-title">{{.Title}}</h2>
+    	{{end}}
         <h5 class="jdk-date"><small>Posted {{.Date}}</small></h5>
         <div class="jdk-paragraphs">
             {{.Content}}

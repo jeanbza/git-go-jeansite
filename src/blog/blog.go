@@ -10,11 +10,14 @@ import (
 )
 
 type Post struct {
-    FileName   string
-    Title      string
-    Date       string
-    Content    template.HTML
+    FileName    string
+    Title       string
+    Date        string
+    Content     template.HTML
+    OneOfMany   bool
 }
+
+var trimByteLength = 200
 
 func GetPage(rw http.ResponseWriter, req *http.Request) {
     re := regexp.MustCompile("/blog/(.+)")
@@ -89,23 +92,18 @@ func loadPosts(rw http.ResponseWriter) {
 }
 
 func loadPage(filePath string, fullPost bool) (Post) {
-    // Split the filepath to get the filename
-    re := regexp.MustCompile("/(.+).txt")
-    fileName := re.FindAllStringSubmatch(filePath, -1)[0][1]
+    var contentString bytes.Buffer
+    fileName :=  parseFilePathForFileName(filePath)
 
     // Read the file's contents
     contentByte, err := ioutil.ReadFile(filePath)
-    var contentString bytes.Buffer
+    common.CheckError(err)
 
-    if err != nil {
-        return Post{}
-    }
-
-    if (!fullPost) {
+    if (!fullPost && len(contentByte) > trimByteLength) {
         var contentByteTrimmed []byte
 
         for index, element := range contentByte {
-            if (index < 120) {
+            if (index < trimByteLength) {
                 contentByteTrimmed = append(contentByteTrimmed, element)
             }
         }
@@ -120,10 +118,30 @@ func loadPage(filePath string, fullPost bool) (Post) {
 
     contentHTML := template.HTML(contentString.String())
 
-    // Split the filepath to get the date
+    return Post{FileName: fileName, Title: parseFilePathForTitle(filePath), Date: parseFilePathForDate(filePath), Content: contentHTML, OneOfMany: !fullPost}
+}
+
+func parseFilePathForFileName(filePath string) (string) {
+    re := regexp.MustCompile("/(.+).txt")
+    fileName := re.FindAllStringSubmatch(filePath, -1)[0][1]
+
+    return fileName
+}
+
+func parseFilePathForTitle(filePath string) (string) {
+    re := regexp.MustCompile("_(.+).txt")
+    title := re.FindAllStringSubmatch(filePath, -1)[0][1]
+
+    return title
+}
+
+/**
+ * Splits the file path for its date
+ */
+func parseFilePathForDate(filePath string) (string) {
     var dateString bytes.Buffer
     
-    re = regexp.MustCompile("/[0-9]{6}([0-9]{2})_.*")
+    re := regexp.MustCompile("/[0-9]{6}([0-9]{2})_.*")
     day := re.FindAllStringSubmatch(filePath, -1)[0][1]
     dateString.WriteString(day)
     dateString.WriteString("-")
@@ -137,11 +155,5 @@ func loadPage(filePath string, fullPost bool) (Post) {
     year := re.FindAllStringSubmatch(filePath, -1)[0][1]
     dateString.WriteString(year)
 
-    // Split the filepath to get the title
-    re = regexp.MustCompile("_(.+).txt")
-    title := re.FindAllStringSubmatch(filePath, -1)[0][1]
-
-    common.CheckError(err)
-
-    return Post{FileName: fileName, Title: title, Date: dateString.String(), Content: contentHTML}
+    return dateString.String()
 }
