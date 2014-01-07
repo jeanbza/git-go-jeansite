@@ -8460,6 +8460,13 @@ html, body {
   margin-bottom: 10px;
 }
 
+.jdk-showcase {
+  padding-left: 0;
+}
+.jdk-showcase .jdk-leftnav {
+  padding-left: 0;
+}
+
 .jdk-main {
   padding-bottom: 20px;
 }

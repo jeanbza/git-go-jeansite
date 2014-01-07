@@ -1,8 +1,8 @@
 package about
 
 import (
-	"net/http"
-	"html/template"
+    "net/http"
+    "html/template"
 )
 
 type Page struct {
@@ -10,7 +10,7 @@ type Page struct {
 }
 
 func GetPage(rw http.ResponseWriter, req *http.Request) {
-	p := Page{
+    p := Page{
         Title: "about",
     }
 

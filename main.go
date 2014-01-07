@@ -3,6 +3,7 @@ package main
 import (
     "github/git-go-jeansite/src/blog"
     "github/git-go-jeansite/src/about"
+    "github/git-go-jeansite/src/showcase"
     "github/git-go-jeansite/src/common"
     "net/http"
 )
@@ -14,6 +15,9 @@ func main() {
 
     http.HandleFunc("/about", aboutPage)
     http.HandleFunc("/about/", aboutPage)
+
+    http.HandleFunc("/showcase", showcasePage)
+    http.HandleFunc("/showcase/", showcasePage)
 
     fileServer := http.StripPrefix("/fonts/", http.FileServer(http.Dir("fonts")))
     http.Handle("/fonts/", fileServer)
@@ -37,4 +41,8 @@ func blogPage(rw http.ResponseWriter, req *http.Request) {
 
 func aboutPage(rw http.ResponseWriter, req *http.Request) {
     about.GetPage(rw, req)
+}
+
+func showcasePage(rw http.ResponseWriter, req *http.Request) {
+    showcase.GetPage(rw, req)
 }

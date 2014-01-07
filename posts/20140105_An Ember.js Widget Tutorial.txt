@@ -1,8 +1,11 @@
 <div class="jdk-paragraph">
     Let's take a look at an easy way to create some pretty cool widgets with Ember.js.
 
-    <script type="text/x-handlebars" data-template-name="widget">
-        <div class="container-fluid widget span5">
+    asdkljasldkjsalkjdasdkljasldkjsalkjdasdkljasldkjsalkjdasdkljasldkjsalkjdasdkljasldkjsalkjdasdkljasldkjsalkjd
+</div>
+
+<script type="text/x-handlebars" data-template-name="widget">
+        <div class="container-fluid widget col-md-4">
             <div class="row-fluid titlebar">
                 <div class="span4 title">
                     {{view.title}}
@@ -50,14 +53,19 @@
         </div>
     </script>
 
+    boom
+
     <script type="text/x-handlebars">
+        start
+
         <div class="ember-widget-demo">
             {{#each widget in App.Widgets.items}}
                 {{view widget}}
             {{/each}}
         </div>
+
+        end
     </script>
-</div>
 
 <script type="text/javascript" src="/js/ember/handlebars-1.1.2.js"></script>
 <script type="text/javascript" src="/js/ember/ember-1.2.0.js"></script>
