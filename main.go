@@ -34,7 +34,7 @@ func main() {
     fileServer = http.StripPrefix("/html/", http.FileServer(http.Dir("html")))
     http.Handle("/html/", fileServer)
 
-    err := http.ListenAndServe(":8080", nil)
+    err := http.ListenAndServe(":80", nil)
     common.CheckError(err)
 }
 
