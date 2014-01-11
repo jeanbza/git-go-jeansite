@@ -22,6 +22,9 @@ func main() {
     fileServer := http.StripPrefix("/fonts/", http.FileServer(http.Dir("fonts")))
     http.Handle("/fonts/", fileServer)
 
+    fileServer = http.StripPrefix("/showcaselib/", http.FileServer(http.Dir("showcaselib")))
+    http.Handle("/showcaselib/", fileServer)
+
     fileServer = http.StripPrefix("/css/", http.FileServer(http.Dir("css")))
     http.Handle("/css/", fileServer)
 

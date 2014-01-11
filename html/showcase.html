@@ -1,28 +1,43 @@
 {{define "body"}}
-    <div class="container jdk-showcase">
-        <div class="row">
-            <div class="col-md-2 jdk-leftnav">
-                <div class="list-group">
-                    <a href="#" class="list-group-item active">
-                        Showcase Item 1
-                    </a>
-                    <a href="#" class="list-group-item">
-                        Showcase Item 2
-                    </a>
-                    <a href="#" class="list-group-item">
-                        Showcase Item 3
-                    </a>
-                    <a href="#" class="list-group-item">
-                        Showcase Item 4
-                    </a>
-                    <a href="#" class="list-group-item">
-                        Showcase Item 5
-                    </a>
-                </div>
-            </div>
-            <div class="col-md-10">
-                This is the main area.
+
+<div class="container jdk-showcase">
+    <div class="row">
+        <div class="col-md-2 jdk-leftnav">
+            <div class="list-group">
+                <a href="#" class="list-group-item active">
+                    Showcase Item 1
+                </a>
+                <a href="#" class="list-group-item">
+                    Showcase Item 2
+                </a>
+                <a href="#" class="list-group-item">
+                    Showcase Item 3
+                </a>
+                <a href="#" class="list-group-item">
+                    Showcase Item 4
+                </a>
+                <a href="#" class="list-group-item">
+                    Showcase Item 5
+                </a>
             </div>
         </div>
+        <div class="col-md-10">
+            This is the main area.
+
+            <link rel="stylesheet" type="text/css" href="/showcaselib/ember_widget/css/showcase.css">
+
+            <script type="text/javascript" src="/js/external/highcharts/highcarts.js"></script>
+            <script type="text/javascript" src="/js/external/ember/handlebars-1.1.2.js"></script>
+            <script type="text/javascript" src="/js/external/ember/ember-1.2.0.js"></script>
+            <script type="text/javascript" src="/showcaselib/ember_widget/js/Showcase.js"></script>
+            <script type="text/javascript" src="/showcaselib/ember_widget/js/Application.js"></script>
+            <script type="text/javascript" src="/showcaselib/ember_widget/js/Widget.js"></script>
+
+            <div class="jdk-js-ember-widget-demo"></div>
+        </div>
     </div>
+</div>
+
+{{.Additional}}
+
 {{end}}
