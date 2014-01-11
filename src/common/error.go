@@ -7,7 +7,11 @@ import (
 
 func CheckError(err error) {
     if err != nil {
-        fmt.Println("Fatal error ", err.Error())
+        ReportError(err)
         os.Exit(1)
     }
+}
+
+func ReportError(err error) {
+    fmt.Println("Fatal error caught by common.CheckError: ", err.Error())
 }
