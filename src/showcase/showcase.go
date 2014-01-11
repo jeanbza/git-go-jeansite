@@ -15,11 +15,12 @@ func GetPage(rw http.ResponseWriter, req *http.Request) {
     
     if (matches == nil) {
         type Page struct {
-            Title       string
-            ShowCase    bool
+            Title               string
+            CurrentShowcase     string
+            ShowCase            bool
         }
 
-        p := Page{Title: "default", ShowCase: false}
+        p := Page{Title: "showcase", CurrentShowcase: "default", ShowCase: false}
 
         tmpl := make(map[string]*template.Template)
         tmpl["showcase.html"] = template.Must(template.ParseFiles("html/showcase.html", "html/index.html", "showcaselib/default/showcase.html"))
@@ -40,8 +41,9 @@ func loadEmberWidgetShowcase(rw http.ResponseWriter) {
     }
 
     type Page struct {
-        Title       string
-        ShowCase    ShowCase
+        Title               string
+        CurrentShowcase     string
+        ShowCase            ShowCase
     }
 
     filePaths := []string{
@@ -62,7 +64,7 @@ func loadEmberWidgetShowcase(rw http.ResponseWriter) {
     contentHTML := template.HTML(contentString.String())
 
     s := ShowCase{Additional: contentHTML}
-    p := Page{Title: "ember_widget", ShowCase: s}
+    p := Page{Title: "showcase", CurrentShowcase: "ember_widget", ShowCase: s}
 
     tmpl := make(map[string]*template.Template)
     tmpl["showcase.html"] = template.Must(template.ParseFiles("html/showcase.html", "html/index.html", "showcaselib/ember_widget/showcase.html"))
