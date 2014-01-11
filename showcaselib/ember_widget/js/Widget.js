@@ -1,6 +1,5 @@
 App.Widget = Ember.View.extend({
     templateName: "widget",
-    someArr: [1,5,3],
     title: "Some Widget",
     graphElem: ".graphHere",
     graphMode: true,

@@ -10,7 +10,7 @@ App.Widgets = Ember.ArrayController.create({
 
 // VIEW
 
-App.CostCenter = Ember.Object.extend({
+App.DataItem = Ember.Object.extend({
     title: "default",
     content: null
 });

@@ -8396,6 +8396,17 @@ code {
   margin-bottom: 10px;
 }
 
+pre {
+  padding-right: 0;
+  padding-left: 10px;
+  font-size: 10px;
+  line-height: 12px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  max-height: 300px;
+  overflow-y: scroll;
+}
+
 .jdk-header {
   border-radius: 0;
   background-color: white;

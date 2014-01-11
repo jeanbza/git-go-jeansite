@@ -5,9 +5,9 @@ App.ApplicationController = Ember.Controller.extend({
         for(var x = 0; x < 5; x++) {
             var tempView = App.Widget.create({
                 data: Ember.makeArray([
-                    App.CostCenter.create({title: "Group A", content: self.getRandomArr(8)}),
-                    App.CostCenter.create({title: "Group B", content: self.getRandomArr(8)}),
-                    App.CostCenter.create({title: "Group C", content: self.getRandomArr(8)})
+                    App.DataItem.create({title: "Group A", content: self.getRandomArr(8)}),
+                    App.DataItem.create({title: "Group B", content: self.getRandomArr(8)}),
+                    App.DataItem.create({title: "Group C", content: self.getRandomArr(8)})
                 ]),
             });
             App.Widgets.items.pushObject(tempView);

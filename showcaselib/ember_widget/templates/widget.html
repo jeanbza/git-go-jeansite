@@ -15,8 +15,7 @@
             </div>
         </div>
 
-        <div class="graphHere">
-        </div>
+        <div class="graphHere"></div>
         {{#unless view.graphMode}}
             <table class="content table">
                 <thead>
@@ -33,10 +32,10 @@
                     </tr>
                 </thead>
                 <tbody>
-                    {{#each costcenter in view.data}}
+                    {{#each dataitem in view.data}}
                         <tr>
-                            <td>{{costcenter.title}} </td>
-                            {{#each value in costcenter.content}}
+                            <td>{{dataitem.title}} </td>
+                            {{#each value in dataitem.content}}
                                 <td>{{value}}</td>
                             {{/each}}
                         </tr>
