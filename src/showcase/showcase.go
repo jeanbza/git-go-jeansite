@@ -3,7 +3,6 @@ package showcase
 import (
     "net/http"
     "html/template"
-    "fmt"
     "regexp"
     "bytes"
     "io/ioutil"
@@ -15,17 +14,15 @@ func GetPage(rw http.ResponseWriter, req *http.Request) {
     matches := re.FindAllStringSubmatch(req.URL.Path, -1)
     
     if (matches == nil) {
-        fmt.Println("Matches is null")
-
         type Page struct {
             Title       string
             ShowCase    bool
         }
 
-        p := Page{Title: "Showcase"}
+        p := Page{Title: "default", ShowCase: false}
 
         tmpl := make(map[string]*template.Template)
-        tmpl["showcase.html"] = template.Must(template.ParseFiles("html/showcase.html", "html/index.html"))
+        tmpl["showcase.html"] = template.Must(template.ParseFiles("html/showcase.html", "html/index.html", "showcaselib/default/showcase.html"))
         tmpl["showcase.html"].ExecuteTemplate(rw, "base", p)
     } else {
         showcaseTitle := matches[0][1]
@@ -55,8 +52,6 @@ func loadEmberWidgetShowcase(rw http.ResponseWriter) {
     var contentString bytes.Buffer
 
     for _, filePath := range filePaths {
-        
-
         // Read the file's contents
         contentByte, err := ioutil.ReadFile(filePath)
         common.CheckError(err)
@@ -67,7 +62,7 @@ func loadEmberWidgetShowcase(rw http.ResponseWriter) {
     contentHTML := template.HTML(contentString.String())
 
     s := ShowCase{Additional: contentHTML}
-    p := Page{Title: "Showcase", ShowCase: s}
+    p := Page{Title: "ember_widget", ShowCase: s}
 
     tmpl := make(map[string]*template.Template)
     tmpl["showcase.html"] = template.Must(template.ParseFiles("html/showcase.html", "html/index.html", "showcaselib/ember_widget/showcase.html"))
