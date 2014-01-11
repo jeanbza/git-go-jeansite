@@ -8407,6 +8407,10 @@ pre {
   overflow-y: scroll;
 }
 
+.jdk-ember-widget .container, .jdk-ember-widget .col-md-4 {
+  padding-left: 0;
+}
+
 .jdk-header {
   border-radius: 0;
   background-color: white;
