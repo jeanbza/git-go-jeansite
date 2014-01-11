@@ -1,10 +1,10 @@
 package main
 
 import (
-    "github/git-go-jeansite/src/blog"
-    "github/git-go-jeansite/src/about"
-    "github/git-go-jeansite/src/showcase"
-    "github/git-go-jeansite/src/common"
+    "git-go-jeansite/src/blog"
+    "git-go-jeansite/src/about"
+    "git-go-jeansite/src/showcase"
+    "git-go-jeansite/src/common"
     "net/http"
 )
 

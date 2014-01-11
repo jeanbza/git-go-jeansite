@@ -1,7 +1,7 @@
 package blog
 
 import (
-    "github/git-go-jeansite/src/common"
+    "git-go-jeansite/src/common"
     "regexp"
     "bytes"
     "io/ioutil"

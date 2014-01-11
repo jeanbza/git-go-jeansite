@@ -6,7 +6,7 @@ import (
     "regexp"
     "bytes"
     "io/ioutil"
-    "github/git-go-jeansite/src/common"
+    "git-go-jeansite/src/common"
 )
 
 func GetPage(rw http.ResponseWriter, req *http.Request) {
