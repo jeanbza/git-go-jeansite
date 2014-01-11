@@ -22,7 +22,9 @@
             </div>
         </div>
         <div class="col-md-10">
-            
+            {{if .ShowCase}}
+                {{template "showcase" .}}
+            {{end}}
         </div>
     </div>
 </div>

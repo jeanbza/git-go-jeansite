@@ -5,12 +5,10 @@ import (
     "html/template"
     "fmt"
     "regexp"
+    "bytes"
+    "io/ioutil"
     "github/git-go-jeansite/src/common"
 )
-
-type Page struct {
-    Title       string
-}
 
 func GetPage(rw http.ResponseWriter, req *http.Request) {
     re := regexp.MustCompile("/showcase/(.+)")
@@ -18,17 +16,60 @@ func GetPage(rw http.ResponseWriter, req *http.Request) {
     
     if (matches == nil) {
         fmt.Println("Matches is null")
+
+        type Page struct {
+            Title       string
+            ShowCase    bool
+        }
+
+        p := Page{Title: "Showcase"}
+
+        tmpl := make(map[string]*template.Template)
+        tmpl["showcase.html"] = template.Must(template.ParseFiles("html/showcase.html", "html/index.html"))
+        tmpl["showcase.html"].ExecuteTemplate(rw, "base", p)
     } else {
         showcaseTitle := matches[0][1]
-        importPath := common.StrCat("showcaselib/", showcaseTitle)
-        importPath = common.StrCat(showcaseTitle, "/showcase.go")
+        
+        switch showcaseTitle {
+            case "ember_widget":
+                loadEmberWidgetShowcase(rw)
+        }
+    }
+}
 
-        fmt.Println(importPath)
+func loadEmberWidgetShowcase(rw http.ResponseWriter) {
+    type ShowCase struct {
+        Additional  template.HTML
     }
 
-    p := Page{Title: "Showcase"}
+    type Page struct {
+        Title       string
+        ShowCase    ShowCase
+    }
+
+    filePaths := []string{
+        "showcaselib/ember_widget/templates/app.html",
+        "showcaselib/ember_widget/templates/widget.html",
+    }
+
+    var contentString bytes.Buffer
+
+    for _, filePath := range filePaths {
+        
+
+        // Read the file's contents
+        contentByte, err := ioutil.ReadFile(filePath)
+        common.CheckError(err)
+
+        contentString.WriteString(string(contentByte))
+    }
+
+    contentHTML := template.HTML(contentString.String())
+
+    s := ShowCase{Additional: contentHTML}
+    p := Page{Title: "Showcase", ShowCase: s}
 
     tmpl := make(map[string]*template.Template)
-    tmpl["showcase.html"] = template.Must(template.ParseFiles("html/showcase.html", "html/index.html"))
+    tmpl["showcase.html"] = template.Must(template.ParseFiles("html/showcase.html", "html/index.html", "showcaselib/ember_widget/showcase.html"))
     tmpl["showcase.html"].ExecuteTemplate(rw, "base", p)
 }
