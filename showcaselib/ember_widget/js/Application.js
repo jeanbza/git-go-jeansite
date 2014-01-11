@@ -12,8 +12,6 @@ App.ApplicationController = Ember.Controller.extend({
             });
             App.Widgets.items.pushObject(tempView);
         }
-
-        console.dir(App.Widgets.items);
     },
 
     getRandomArr: function(size) {

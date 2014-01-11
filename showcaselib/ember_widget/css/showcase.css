@@ -1,15 +1,23 @@
 .jdk-showcase .table {
   margin: 0;
+  font-size: 10px;
 }
 
 .jdk-showcase .widget {
   border: 1px solid #c8c9c7;
   border-radius: 4px;
   padding: 0;
+  height: 300px;
+  margin: 0 10px 10px 0;
+}
+
+.jdk-showcase .graphHere {
+  padding-right: 5px;
 }
 
 .jdk-showcase .widget .titlebar {
   border-bottom: 1px solid #c8c9c7;
+  height: 31px;
 }
 
 .jdk-showcase .widget .titlebar .buttons button {

@@ -1,7 +1,7 @@
 App.Widget = Ember.View.extend({
     templateName: "widget",
     someArr: [1,5,3],
-    title: "CTL",
+    title: "Some Widget",
     graphElem: ".graphHere",
     graphMode: true,
 
@@ -32,6 +32,10 @@ App.Widget = Ember.View.extend({
             });
 
             self.$().find("."+graphClass).highcharts({
+                chart: {
+                    height: 250,
+                    marginRight: 10
+                },
                 title: {
                     text: 'Scores',
                     x: -20
@@ -58,7 +62,10 @@ App.Widget = Ember.View.extend({
                     verticalAlign: 'middle',
                     borderWidth: 0
                 },
-                series: data
+                series: data,
+                credits: {
+                    enabled: false
+                }
             });
         });
     }
