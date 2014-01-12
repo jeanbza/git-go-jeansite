@@ -17,7 +17,7 @@ type Post struct {
     OneOfMany   bool
 }
 
-var trimByteLength = 80
+var trimByteLength = 160
 
 func GetPage(rw http.ResponseWriter, req *http.Request) {
     re := regexp.MustCompile("/blog/(.+)")
