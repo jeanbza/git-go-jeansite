@@ -19,22 +19,13 @@ func main() {
     http.HandleFunc("/showcase", showcasePage)
     http.HandleFunc("/showcase/", showcasePage)
 
-    fileServer := http.StripPrefix("/fonts/", http.FileServer(http.Dir("fonts")))
-    http.Handle("/fonts/", fileServer)
+    fileServer := http.StripPrefix("/static/", http.FileServer(http.Dir("static")))
+    http.Handle("/static/", fileServer)
 
-    fileServer = http.StripPrefix("/showcaselib/", http.FileServer(http.Dir("showcaselib")))
-    http.Handle("/showcaselib/", fileServer)
+    fileServer = http.StripPrefix("/resources/", http.FileServer(http.Dir("resources")))
+    http.Handle("/resources/", fileServer)
 
-    fileServer = http.StripPrefix("/css/", http.FileServer(http.Dir("css")))
-    http.Handle("/css/", fileServer)
-
-    fileServer = http.StripPrefix("/js/", http.FileServer(http.Dir("js")))
-    http.Handle("/js/", fileServer)
-
-    fileServer = http.StripPrefix("/html/", http.FileServer(http.Dir("html")))
-    http.Handle("/html/", fileServer)
-
-    err := http.ListenAndServe(":80", nil)
+    err := http.ListenAndServe(":8080", nil)
     common.CheckError(err)
 }
 

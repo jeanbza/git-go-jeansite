@@ -17,7 +17,7 @@ type Post struct {
     OneOfMany   bool
 }
 
-var trimByteLength = 200
+var trimByteLength = 80
 
 func GetPage(rw http.ResponseWriter, req *http.Request) {
     re := regexp.MustCompile("/blog/(.+)")
@@ -43,7 +43,7 @@ func loadPost(rw http.ResponseWriter, postTitle string) {
         SinglePost  bool
     }
 
-    filePath.WriteString("posts/")
+    filePath.WriteString("resources/")
     filePath.WriteString(postTitle)
     filePath.WriteString(".txt")
 
@@ -56,7 +56,7 @@ func loadPost(rw http.ResponseWriter, postTitle string) {
     }
 
     tmpl := make(map[string]*template.Template)
-    tmpl["blog.html"] = template.Must(template.ParseFiles("html/post.html", "html/blog.html", "html/index.html"))
+    tmpl["blog.html"] = template.Must(template.ParseFiles("resources/html/post.html", "resources/html/blog.html", "resources/html/index.html"))
     tmpl["blog.html"].ExecuteTemplate(rw, "base", p)
 }
 
@@ -70,12 +70,12 @@ func loadPosts(rw http.ResponseWriter) {
         SinglePost  bool
     }
 
-    postPaths, _ := ioutil.ReadDir("posts")
+    postPaths, _ := ioutil.ReadDir("resources/posts")
     
     for i := len(postPaths)-1; i >= 0; i-- {
         element := postPaths[i]
         filePath.Reset()
-        filePath.WriteString("posts/")
+        filePath.WriteString("resources/posts/")
         filePath.WriteString(element.Name())
         posts = append(posts, loadPage(filePath.String(), false))
     }
@@ -87,7 +87,7 @@ func loadPosts(rw http.ResponseWriter) {
     }
 
     tmpl := make(map[string]*template.Template)
-    tmpl["blog.html"] = template.Must(template.ParseFiles("html/post.html", "html/blog.html", "html/index.html"))
+    tmpl["blog.html"] = template.Must(template.ParseFiles("resources/html/post.html", "resources/html/blog.html", "resources/html/index.html"))
     tmpl["blog.html"].ExecuteTemplate(rw, "base", p)
 }
 

@@ -1,0 +1,11 @@
+{{define "body"}}
+    {{if .SinglePost}}
+        {{template "post" .Post}}
+    {{else}}
+        {{range .Posts}}
+            <div class="row">
+                {{template "post" .}}
+            </div>
+        {{end}}
+    {{end}}
+{{end}}

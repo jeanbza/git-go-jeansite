@@ -1,0 +1,45 @@
+.jdk-showcase .table {
+  margin: 0;
+  font-size: 10px;
+}
+
+.jdk-showcase .widget {
+  border: 1px solid #c8c9c7;
+  border-radius: 4px;
+  padding: 0;
+  height: 300px;
+  margin: 0 10px 10px 0;
+}
+
+.jdk-showcase .graphHere {
+  padding-right: 5px;
+}
+
+.jdk-showcase .widget .titlebar {
+  border-bottom: 1px solid #c8c9c7;
+  height: 31px;
+}
+
+.jdk-showcase .widget .titlebar .buttons button {
+  height: 30px;
+  border-top-left-radius: 0px;
+  border-bottom-left-radius: 0px;
+  float: right;
+  border-left: 1px solid #c8c9c7;
+  border-right: none;
+  border-top: none;
+  border-bottom: none;
+  background-color: white;
+  box-shadow: none;
+  background-image: none;
+}
+
+.jdk-showcase .widget .titlebar .title {
+  padding-top: 3px;
+  padding-bottom: 3px;
+}
+
+.jdk-showcase .widget .titlebar .title, .widget .titlebar .buttons {
+  padding-right: 5px;
+  padding-left: 5px;
+}

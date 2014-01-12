@@ -23,7 +23,7 @@ func GetPage(rw http.ResponseWriter, req *http.Request) {
         p := Page{Title: "showcase", CurrentShowcase: "default", ShowCase: false}
 
         tmpl := make(map[string]*template.Template)
-        tmpl["showcase.html"] = template.Must(template.ParseFiles("html/showcase.html", "html/index.html", "showcaselib/default/showcase.html"))
+        tmpl["showcase.html"] = template.Must(template.ParseFiles("resources/html/showcase.html", "resources/html/index.html", "resources/showcases/default/showcase.html"))
         tmpl["showcase.html"].ExecuteTemplate(rw, "base", p)
     } else {
         showcaseTitle := matches[0][1]
@@ -47,8 +47,8 @@ func loadEmberWidgetShowcase(rw http.ResponseWriter) {
     }
 
     filePaths := []string{
-        "showcaselib/ember_widget/templates/app.html",
-        "showcaselib/ember_widget/templates/widget.html",
+        "resources/showcases/ember_widget/templates/app.html",
+        "resources/showcases/ember_widget/templates/widget.html",
     }
 
     var contentString bytes.Buffer
@@ -67,6 +67,6 @@ func loadEmberWidgetShowcase(rw http.ResponseWriter) {
     p := Page{Title: "showcase", CurrentShowcase: "ember_widget", ShowCase: s}
 
     tmpl := make(map[string]*template.Template)
-    tmpl["showcase.html"] = template.Must(template.ParseFiles("html/showcase.html", "html/index.html", "showcaselib/ember_widget/showcase.html"))
+    tmpl["showcase.html"] = template.Must(template.ParseFiles("resources/html/showcase.html", "resources/html/index.html", "resources/showcases/ember_widget/showcase.html"))
     tmpl["showcase.html"].ExecuteTemplate(rw, "base", p)
 }

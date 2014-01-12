@@ -1,0 +1,47 @@
+<script type="text/x-handlebars" data-template-name="widget">
+    <div class="container-fluid widget col-md-4">
+        <div class="row-fluid titlebar">
+            <div class="col-md-4 title">
+                {{view.title}}
+            </div>
+            <div class="col-md-8 buttons">
+                <button {{action switchMode view}} class="btn">
+                    {{#if view.graphMode}}
+                        <i class="fa fa-table"></i>
+                    {{else}}
+                        <i class="fa fa-bar-chart-o"></i>
+                    {{/if}}
+                </button>
+            </div>
+        </div>
+
+        <div class="graphHere"></div>
+        {{#unless view.graphMode}}
+            <table class="content table">
+                <thead>
+                    <tr>
+                        <td>Cost Center</td>
+                        <td>Jan</td>
+                        <td>Feb</td>
+                        <td>Mar</td>
+                        <td>Apr</td>
+                        <td>May</td>
+                        <td>Jun</td>
+                        <td>Jul</td>
+                        <td>Aug</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each dataitem in view.data}}
+                        <tr>
+                            <td>{{dataitem.title}} </td>
+                            {{#each value in dataitem.content}}
+                                <td>{{value}}</td>
+                            {{/each}}
+                        </tr>
+                    {{/each}}
+                <tbody>
+            </table>
+        {{/unless}}
+    </div>
+</script>

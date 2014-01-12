@@ -15,6 +15,6 @@ func GetPage(rw http.ResponseWriter, req *http.Request) {
     }
 
     tmpl := make(map[string]*template.Template)
-    tmpl["about.html"] = template.Must(template.ParseFiles("html/about.html", "html/index.html"))
+    tmpl["about.html"] = template.Must(template.ParseFiles("resources/html/about.html", "resources/html/index.html"))
     tmpl["about.html"].ExecuteTemplate(rw, "base", p)
 }

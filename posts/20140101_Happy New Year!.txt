@@ -1,3 +1,0 @@
-<div class="jdk-paragraph">
-    Happy new year's everyone! Let's spend the year building awesome things, being good to each other, and trying not to screw anything up.
-</div> 
