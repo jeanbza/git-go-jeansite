@@ -1,21 +1,20 @@
-<div class="jdk-ember-widget">
-    <div class="jdk-paragraph">
-        Let's take a look at an easy way to create some pretty cool widgets with Ember.js. See a completed example in <a target="_blank" href="/showcase/ember_widget">the showcase area</a>, and the corresponding code at <a target="_blank" href="https://github.com/jadekler/git-ember-widgetdemo">this github repo</a>.
-    </div>
-    <div class="jdk-paragraph">
-        Our widgets are going to graph some dataset and have a button to switch to a table view. Please note - bootstrap styling was used with this. I'll leave it to you to include it. To get started, let's create a basic widget object, a widget template, and a basic array to hold widgets, and just a little bit of css to style this:
-    </div>
+<div class="jdk-paragraph">
+    Let's take a look at an easy way to create some pretty cool widgets with Ember.js. See a completed example in <a target="_blank" href="/showcase/ember_widget">the showcase area</a>, and the corresponding code at <a target="_blank" href="https://github.com/jadekler/git-ember-widgetdemo">this github repo</a>.
+</div>
+<div class="jdk-paragraph">
+    Our widgets are going to graph some dataset and have a button to switch to a table view. Please note - bootstrap styling was used with this. I'll leave it to you to include it. To get started, let's create a basic widget object, a widget template, and a basic array to hold widgets, and just a little bit of css to style this:
+</div>
 
-    <div class="container">
-        <div class="row">
-            <div class="col-md-4">
-                <code>Data item</code>
-                <pre>App.DataItem = Ember.Object.extend({
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+            <code>Data item</code>
+            <pre>App.DataItem = Ember.Object.extend({
     title: "default",
     content: null
 });</pre>
-                <code>Widget template</code>
-                <pre>&lt;script type="text/x-handlebars" data-template-name="widget"&gt;
+            <code>Widget template</code>
+            <pre>&lt;script type="text/x-handlebars" data-template-name="widget"&gt;
     &lt;div class="container-fluid widget span5"&gt;
         &lt;div class="row-fluid titlebar"&gt;
             &lt;div class="span4 title"&gt;
@@ -24,21 +23,21 @@
         &lt;/div&gt;
     &lt;/div&gt;
 &lt;/script&gt;</pre>
-            <code>Widget view</code>
-            <pre>App.Widget = Ember.View.extend({
+        <code>Widget view</code>
+        <pre>App.Widget = Ember.View.extend({
     templateName: "widget",
     title: "Some Widget",
 });</pre>
-            </div>
-            <div class="col-md-4">
-                <code>Application template</code>
-                <pre>&lt;script type="text/x-handlebars"&gt;
+        </div>
+        <div class="col-md-4">
+            <code>Application template</code>
+            <pre>&lt;script type="text/x-handlebars"&gt;
     {{#each widget in App.Widgets.items}}
         {{view widget}}
     {{/each}}
 &lt;/script&gt;</pre>
-                <code>Application controller</code>
-                <pre>window.App = Ember.Application.create();
+            <code>Application controller</code>
+            <pre>window.App = Ember.Application.create();
 
 App.ApplicationController = Ember.Controller.extend({
     init: function() {
@@ -70,10 +69,10 @@ App.ApplicationController = Ember.Controller.extend({
         return Math.floor(Math.random() * (max - min + 1)) + min;
     },
 });</pre>
-            </div>
-            <div class="col-md-4">
-                <code>Styling</code>
-                <pre>.table {
+        </div>
+        <div class="col-md-4">
+            <code>Styling</code>
+            <pre>.table {
   margin: 0;
   font-size: 10px;
 }
@@ -114,19 +113,19 @@ App.ApplicationController = Ember.Controller.extend({
   padding-right: 5px;
   padding-left: 5px;
 }</pre>
-            </div>
         </div>
     </div>
+</div>
 
-    <div class="jdk-paragraph">
-        So now we have the basics: an iterator that loops over the widgets, and a widget view that has a title. Let's extend it a bit to graph data. To do that we'll have to add a .graphHere div, a function in the widget controller to graph the data, and a graphing package. We'll use highcharts - once again, I'll leave it to you to include it. Modify App.Widget and the widget template as follows.
-    </div>
+<div class="jdk-paragraph">
+    So now we have the basics: an iterator that loops over the widgets, and a widget view that has a title. Let's extend it a bit to graph data. To do that we'll have to add a .graphHere div, a function in the widget controller to graph the data, and a graphing package. We'll use highcharts - once again, I'll leave it to you to include it. Modify App.Widget and the widget template as follows.
+</div>
 
-    <div class="container">
-        <div class="row">
-            <div class="col-md-4">
-                <code>Widget view</code>
-                <pre>App.Widget = Ember.View.extend({
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+            <code>Widget view</code>
+            <pre>App.Widget = Ember.View.extend({
     templateName: "widget",
     title: "Some Widget",
     graphElem: ".graphHere",
@@ -187,10 +186,10 @@ App.ApplicationController = Ember.Controller.extend({
         });
     }
 });</pre>
-            </div>
-            <div class="col-md-4">
-                <code>Widget template</code>
-                <pre>&lt;script type="text/x-handlebars" data-template-name="widget"&gt;
+        </div>
+        <div class="col-md-4">
+            <code>Widget template</code>
+            <pre>&lt;script type="text/x-handlebars" data-template-name="widget"&gt;
     &lt;div class="container-fluid widget span5"&gt;
         &lt;div class="row-fluid titlebar"&gt;
             &lt;div class="span4 title"&gt;
@@ -200,18 +199,17 @@ App.ApplicationController = Ember.Controller.extend({
         &lt;div class="graphHere"&gt;&lt;/div&gt;
     &lt;/div&gt;
 &lt;/script&gt;</pre>
-            </div>
         </div>
     </div>
-    <div class="jdk-paragraph">
-        Now we have a widget that shows graph data. Let's modify just once more to allow us to switch between graphs and tables. To do this, we're going to add to our widget template an if/else to switch between graphing and tables, and we're going to modify our widget view to allow for switching view modes.
-    </div>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-4">
-                <code>Widget view</code>
-                <pre>
-App.Widget = Ember.View.extend({
+</div>
+<div class="jdk-paragraph">
+    Now we have a widget that shows graph data. Let's modify just once more to allow us to switch between graphs and tables. To do this, we're going to add to our widget template an if/else to switch between graphing and tables, and we're going to modify our widget view to allow for switching view modes.
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+            <code>Widget view</code>
+            <pre>App.Widget = Ember.View.extend({
     templateName: "widget",
     title: "Some Widget",
     graphElem: ".graphHere",
@@ -282,10 +280,10 @@ App.Widget = Ember.View.extend({
         });
     }
 });</pre>
-            </div>
-            <div class="col-md-4">
-                <code>Widget template</code>
-                <pre>&lt;div class="container-fluid widget col-md-4"&gt;
+        </div>
+        <div class="col-md-4">
+            <code>Widget template</code>
+            <pre>&lt;div class="container-fluid widget col-md-4"&gt;
     &lt;div class="row-fluid titlebar"&gt;
         &lt;div class="col-md-4 title"&gt;
             {{view.title}}
@@ -330,10 +328,9 @@ App.Widget = Ember.View.extend({
         &lt;/table&gt;
     {{/unless}}
 &lt;/div&gt;</pre>
-            </div>
         </div>
     </div>
-    <div class="jdk-paragraph">
-        That should just about do it! A basic Ember.js widget.
-    </div>
+</div>
+<div class="jdk-paragraph">
+    That should just about do it! A basic Ember.js widget.
 </div>

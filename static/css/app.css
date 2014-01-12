@@ -8407,7 +8407,7 @@ pre {
   overflow-y: scroll;
 }
 
-.jdk-ember-widget .container, .jdk-ember-widget .col-md-4 {
+.jdk-blog-post .container, .jdk-blog-post .col-md-4 {
   padding-left: 0;
 }
 
