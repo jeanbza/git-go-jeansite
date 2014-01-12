@@ -1,5 +1,5 @@
 <div class="jdk-paragraph">
-    Let's take a look at an easy way to create some pretty cool widgets with Ember.js. See a completed example in <a target="_blank" href="/showcase/ember_widget">the showcase area</a>, and the corresponding code at <a target="_blank" href="https://github.com/jadekler/git-ember-widgetdemo">this github repo</a>.
+    Let's take a look at an easy way to create some pretty cool widgets with Ember.js. See a completed example in the showcase area, found <a target="_blank" href="/showcase/ember_widget">here</a>, and the corresponding code at <a target="_blank" href="https://github.com/jadekler/git-ember-widgetdemo">this github repo</a>.
 </div>
 <div class="jdk-paragraph">
     Our widgets are going to graph some dataset and have a button to switch to a table view. Please note - bootstrap styling was used with this. I'll leave it to you to include it. To get started, let's create a basic widget object, a widget template, and a basic array to hold widgets, and just a little bit of css to style this:
