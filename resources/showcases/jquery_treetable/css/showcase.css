@@ -1,0 +1,40 @@
+.jdk-showcase .treetable {
+  padding-top: 20px;
+}
+
+.jdk-showcase .treetable a {
+  cursor: pointer;
+}
+
+.jdk-showcase .treetable .tree-branch.root {
+  padding-left: 0;
+}
+
+.jdk-showcase .treetable .tree-node {
+  list-style-type: none;
+  background: none;
+}
+
+.jdk-showcase .treetable .tree-node.root {
+  padding: 0;
+}
+
+.jdk-showcase .treetable .tree-node .checkbox {
+  margin-top: 0;
+  margin-right: 3px;
+  margin-bottom: 0;
+  margin-left: 0;
+  display: inline;
+}
+
+.jdk-showcase .treetable .toggle-expand {
+  font-size: 12px;
+  opacity: 0.8;
+  cursor: pointer;
+  color: black;
+  text-decoration: none;
+}
+
+.jdk-showcase .treetable .children-are-invisible ul {
+  display: none;
+}
