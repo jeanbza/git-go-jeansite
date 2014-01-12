@@ -4,6 +4,7 @@ App = Ember.Application.create({
 
 App.ApplicationController = Ember.Controller.extend({
     expandRandomItem: function() {
+        console.dir(App.TreeNodeController.controllerForNodeById(1));
         App.TreeNodeController.controllerForNodeById(10).bubbleExpanded();
     }
 });
