@@ -1,0 +1,41 @@
+.jdk-showcase ul {
+  list-style-type: none;
+}
+
+.jdk-showcase .children-are-invisible ul {
+  display: none;
+}
+
+.jdk-showcase .expand-all {
+  cursor: pointer;
+}
+
+.jdk-showcase .tree-branch {
+  padding: 0px;
+  margin: 0px;
+}
+
+.jdk-showcase .tree-node .tree-branch {
+  padding-left: 10px;
+}
+
+.jdk-showcase .tree-node {
+  list-style: none;
+  line-height: 20px;
+}
+
+.jdk-showcase .tree-node .toggle-icon {
+  cursor: pointer;
+  display: inline-block;
+  width: 10px;
+  margin-right: 0px;
+  font-size: 10px;
+}
+
+.jdk-showcase .tree-node .toggle-icon:hover {
+  opacity: 0.8;
+}
+
+.jdk-showcase .tree-node .toggle-icon.leaf {
+  visibility: hidden;
+}

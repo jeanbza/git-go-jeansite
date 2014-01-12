@@ -1,0 +1,27 @@
+{{define "showcase"}}
+    <link rel="stylesheet" type="text/css" href="/resources/showcases/ember_treetable/css/showcase.css">
+
+    <script type="text/javascript">
+        window.ENV = window.ENV || {};
+        ENV.EXPERIMENTAL_CONTROL_HELPER = true;
+    </script>
+
+    <script type="text/javascript" src="/static/js/external/highcharts/highcharts.js"></script>
+    <script type="text/javascript" src="/static/js/external/ember/handlebars-1.1.2.js"></script>
+    <script type="text/javascript" src="/static/js/external/ember/ember-1.2.0.js"></script>
+
+    <script type="text/javascript" src="/resources/showcases/ember_treetable/js/treetable.js"></script>
+    <script type="text/javascript" src="/resources/showcases/ember_treetable/js/model/model.js"></script>
+    <script type="text/javascript" src="/resources/showcases/ember_treetable/js/controller/treeTableController.js"></script>
+    <script type="text/javascript" src="/resources/showcases/ember_treetable/js/controller/treeBranchController.js"></script>
+    <script type="text/javascript" src="/resources/showcases/ember_treetable/js/controller/treeNodeController.js"></script>
+    <script type="text/javascript" src="/resources/showcases/ember_treetable/js/view/treeTableView.js"></script>
+    <script type="text/javascript" src="/resources/showcases/ember_treetable/js/view/treeBranchView.js"></script>
+    <script type="text/javascript" src="/resources/showcases/ember_treetable/js/view/treeNodeView.js"></script>
+    
+    <div class="jdk-paragraph">Note: I leave styling to the reader.</div>
+
+    <div class="jdk-js-ember-treetable-demo"></div>
+
+    {{.Additional}}
+{{end}}

@@ -1,0 +1,44 @@
+<script data-template-name="tree-application" type="text/x-handlebars">
+    <div {{action toggleAllExpanded}} class="expand-all">
+        {{#if controllers.treetable.allExpanded}}
+            <a href="#">Collapse All</a>
+        {{else}}
+            <a href="#">Expand All</a>
+        {{/if}}
+    </div>
+
+    {{control "treeBranch" App.treeRoot}}
+    {{#if App.selectedNodes.length}}
+        <p>You have selected:</p>
+        <ul>
+            {{#each node in App.selectedNodes}}
+                <li>{{node.text}}</li>
+            {{/each}}
+        </ul>
+    {{else}}
+        <p>Select something</p>
+    {{/if}}
+</script>
+
+<script data-template-name="tree" type="text/x-handlebars">
+    {{control "treeBranch" content}}
+</script>
+
+<script data-template-name="tree-branch" type="text/x-handlebars">
+    {{each children itemController="treeNode" itemViewClass="App.TreeNodeView"}}
+</script>
+
+<script data-template-name="tree-node" type="text/x-handlebars">
+    <span {{bindAttr class=":toggle-icon children.length::leaf"}} {{action toggle view}}>
+        {{#if isExpanded}}
+            &#x25BC;
+        {{else}}
+            &#x25B6;
+        {{/if}}
+    </span>
+    
+    {{view Ember.Checkbox checkedBinding="checked"}}
+    {{id}}. {{text}}
+    
+    {{control "treeBranch" content}}
+</script>

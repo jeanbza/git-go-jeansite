@@ -31,8 +31,46 @@ func GetPage(rw http.ResponseWriter, req *http.Request) {
         switch showcaseTitle {
             case "ember_widget":
                 loadEmberWidgetShowcase(rw)
+            case "ember_treetable":
+                loadEmberTreetableShowcase(rw)
         }
     }
+}
+
+func loadEmberTreetableShowcase(rw http.ResponseWriter) {
+    type ShowCase struct {
+        Additional  template.HTML
+    }
+
+    type Page struct {
+        Title               string
+        CurrentShowcase     string
+        ShowCase            ShowCase
+    }
+
+    filePaths := []string{
+        "resources/showcases/ember_treetable/templates/app.html",
+        "resources/showcases/ember_treetable/templates/tree.html",
+    }
+
+    var contentString bytes.Buffer
+
+    for _, filePath := range filePaths {
+        // Read the file's contents
+        contentByte, err := ioutil.ReadFile(filePath)
+        common.CheckError(err)
+
+        contentString.WriteString(string(contentByte))
+    }
+
+    contentHTML := template.HTML(contentString.String())
+
+    s := ShowCase{Additional: contentHTML}
+    p := Page{Title: "showcase", CurrentShowcase: "ember_treetable", ShowCase: s}
+
+    tmpl := make(map[string]*template.Template)
+    tmpl["showcase.html"] = template.Must(template.ParseFiles("resources/html/showcase.html", "resources/html/index.html", "resources/showcases/ember_treetable/showcase.html"))
+    tmpl["showcase.html"].ExecuteTemplate(rw, "base", p)
 }
 
 func loadEmberWidgetShowcase(rw http.ResponseWriter) {
