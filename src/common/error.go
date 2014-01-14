@@ -2,13 +2,13 @@ package common
 
 import (
 	"fmt"
-	"os"
+	// "os"
 )
 
 func CheckError(err error) {
     if err != nil {
         ReportError(err)
-        os.Exit(1)
+        // os.Exit(1)
     }
 }
 
