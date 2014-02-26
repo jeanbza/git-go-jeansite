@@ -2,7 +2,7 @@
     Long time, no post: lots of long, exhausting trips tend to do that. Anyways, enough of me and onto the content of this post - the <a target="_blank" href="http://www.wolfram.com/wolfram-language/">Wolfram Knowledge-Based Programming Language</a>. Here's a pretty good video explaining some of the things you can do with this language: <a target="_blank" href="http://www.youtube.com/watch?v=_P9HqHVPeik">(youtube)</a>.
 </div>
 <div class="jdk-paragraph">
-    I don't see this language being revolutionary, to be honest - Mathematic already does many of the things shown in this video. What stands out to me, though, are three things:
+    I don't see this language being revolutionary, to be honest - Mathematica already does many of the things shown in this video. What stands out to me, though, are three things:
     <ol>
         <li>'Knowledge-y' functions: for instance, weather data on the fly (e.g., wind speeds correlated to atmospheric pressure), geographical interpolation (e.g., travelling salesman combined with traffic data), social+cultural data (e.g., facebook mapping)</li>
         <li>Human speech abstraction: e.g., Wolfram knowing what the computational equivalent to something like "square rotated 40 degree tranposed onto map of Raleigh,NC". This could be a great introduction to learning programming for kids and other newbies (I say that fondly, to be clear)</li>
