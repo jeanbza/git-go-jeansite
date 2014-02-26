@@ -1,0 +1,17 @@
+<div class="jdk-paragraph">
+    Long time, no post: lots of long, exhausting trips tend to do that. Anyways, enough of me and onto the content of this post - the <a target="_blank" href="http://www.wolfram.com/wolfram-language/">Wolfram Knowledge-Based Programming Language</a>. Here's a pretty good video explaining some of the things you can do with this language: <a target="_blank" href="http://www.youtube.com/watch?v=_P9HqHVPeik">(youtube)</a>.
+</div>
+<div class="jdk-paragraph">
+    I don't see this language being revolutionary, to be honest - Mathematic already does many of the things shown in this video. What stands out to me, though, are three things:
+    <ol>
+        <li>'Knowledge-y' functions: for instance, weather data on the fly (e.g., wind speeds correlated to atmospheric pressure), geographical interpolation (e.g., travelling salesman combined with traffic data), social+cultural data (e.g., facebook mapping)</li>
+        <li>Human speech abstraction: e.g., Wolfram knowing what the computational equivalent to something like "square rotated 40 degree tranposed onto map of Raleigh,NC". This could be a great introduction to learning programming for kids and other newbies (I say that fondly, to be clear)</li>
+        <li>The ability to create scripts in 'the cloud' (fancy way of saying you can host them on Wolfram's servers and access them through some crazy url). This is pretty neat when you mix it with the aforementioned 'knowledge-y' functions - e.g., creating a weather data API in a couple of minutes, or perhaps an API that you can use to outsource your complex linear algebra computations to</li>
+    </ol>
+</div>
+<div class="jdk-paragraph">
+    There are certainly some downsides, though. This is not a free product, and it is certainly not open source. This will probably be a paid for product, which combined with the fact that many of the benefits are most useful in a learning or academic environment means that the most use this will see is probably in schools and universities, in the same way that Wolfram Alpha is mostly used by students.
+</div>
+<div class="jdk-paragraph">
+    I'd love to give it a try - creating a weather API that I can use d3 to create charts around would be a lot of fun. However, if it is behind even a $10 pay wall I will probably give it a pass. We'll have to wait and see how generous Wolfram feels.
+</div>
