@@ -1,3 +1,164 @@
 <div class="jdk-paragraph">
     This post will serve as a quick, functional guide to jumping into git as well as a refresher for those who've used it before. I will use some examples from SVN as comparison.
 </div>
+<div class="jdk-paragraph">
+    <h4>Git Clone <small>Feels like <strong>svn checkout</strong></small></h4>
+    Commands
+    <pre>
+git clone [repo address] [local address]
+    </pre>
+    Example
+    <pre>
+[jeand@Jeans-MacBook-Pro-2:/Applications/XAMPP/htdocs]$ git clone https://github.com/jadekler/git-misc.git
+Cloning into 'git-misc'...
+remote: Reusing existing pack: 540, done.
+remote: Total 540 (delta 0), reused 0 (delta 0)
+Receiving objects: 100% (540/540), 13.75 MiB | 4.19 MiB/s, done.
+Resolving deltas: 100% (192/192), done.
+Checking connectivity... done
+    </pre>
+</div>
+<div class="jdk-paragraph">
+    <h4>Git Status <small>Feels like <strong>svn status</strong></small></h4>
+    Commands
+    <pre>
+git status
+    </pre>
+    Example
+    <pre>
+[jeand@Jeans-MacBook-Pro-2:/Applications/XAMPP/htdocs/git-misc]$ git status
+# On branch master
+# Untracked files:
+#   (use "git add <file>..." to include in what will be committed)
+#
+#   test/
+nothing added to commit but untracked files present (use "git add" to track)
+    </pre>
+</div>
+<div class="jdk-paragraph">
+    <h4>Git Add, Commit, Push <small>Feels like <strong>svn commit</strong></small></h4>
+    Commands
+    <pre>
+# -A will add all, including removals
+git add [filename] OR git add -A
+
+# Store commit on local machine
+git commit -m [commit message]
+
+# Send to server
+git push
+    </pre>
+    Example
+    <pre>
+[jeand@Jeans-MacBook-Pro-2:/Applications/XAMPP/htdocs/git-misc]$ git add -A
+[jeand@Jeans-MacBook-Pro-2:/Applications/XAMPP/htdocs/git-misc]$ git commit -m "Added test folder"
+[master 3d2a496] Added test folder
+ 1 file changed, 1 insertion(+)
+ create mode 100644 test/index.html
+[jeand@Jeans-MacBook-Pro-2:/Applications/XAMPP/htdocs/git-misc]$ git push
+Counting objects: 5, done.
+Delta compression using up to 8 threads.
+Compressing objects: 100% (2/2), done.
+Writing objects: 100% (4/4), 311 bytes | 0 bytes/s, done.
+Total 4 (delta 1), reused 0 (delta 0)
+To https://github.com/jadekler/git-misc.git
+   5f78792..3d2a496  master -> master
+    </pre>
+</div>
+<div class="jdk-paragraph">
+    <h4>Git Pull <small>Feels like <strong>svn update</strong></small></h4>
+    Commands
+    <pre>
+git pull
+    </pre>
+    Example
+    <pre>
+[jeand@Jeans-MacBook-Pro-2:/Applications/XAMPP/htdocs/git-misc]$ git pull
+remote: Counting objects: 7, done.
+remote: Compressing objects: 100% (2/2), done.
+remote: Total 4 (delta 1), reused 0 (delta 0)
+Unpacking objects: 100% (4/4), done.
+From https://github.com/jadekler/git-misc
+   3d2a496..8bfcfea  master     -> origin/master
+Updating 3d2a496..8bfcfea
+Fast-forward
+ test/index.html | 2 ++
+ 1 file changed, 2 insertions(+)
+    </pre>
+</div>
+<div class="jdk-paragraph">
+    <h4>Git Branch Create <small>Feels like <strong>svn checkout trunk branch</strong></small></h4>
+    Commands
+    <pre>
+# Create new branch and switch to it
+git checkout -b [branch name]
+
+# View your branches
+git branch
+
+# Add new branch to repository
+git push origin [branch name]
+    </pre>
+    Example
+    <pre>
+[jeand@Jeans-MacBook-Pro-2:/Applications/XAMPP/htdocs/git-misc]$ git checkout -b newbranch
+Switched to a new branch 'newbranch'
+[jeand@Jeans-MacBook-Pro-2:/Applications/XAMPP/htdocs/git-misc]$ git branch
+  master
+* newbranch
+[jeand@Jeans-MacBook-Pro-2:/Applications/XAMPP/htdocs/git-misc]$ git push origin newbranch
+Total 0 (delta 0), reused 0 (delta 0)
+To https://github.com/jadekler/git-misc.git
+ * [new branch]      newbranch -> newbranch
+    </pre>
+</div>
+<div class="jdk-paragraph">
+    <h4>Git Branch Pushing <small>Feels like <strong>svn commit</strong></small></h4>
+    Commands
+    <pre>
+# Same as before
+git add -A
+git commit -m [commit message]
+
+# Pushing a branch requires manually specifying the from and to
+git push origin [branch name]
+    </pre>
+    Example
+    <pre>
+[jeand@Jeans-MacBook-Pro-2:/Applications/XAMPP/htdocs/git-misc]$ git add -A
+[jeand@Jeans-MacBook-Pro-2:/Applications/XAMPP/htdocs/git-misc]$ git commit -m "Some minor changes to my file in this branch"
+[newbranch 7c91650] Some minor changes to my file in this branch
+ 1 file changed, 2 insertions(+)
+[jeand@Jeans-MacBook-Pro-2:/Applications/XAMPP/htdocs/git-misc]$ git push origin newbranch
+Counting objects: 7, done.
+Delta compression using up to 8 threads.
+Compressing objects: 100% (2/2), done.
+Writing objects: 100% (4/4), 332 bytes | 0 bytes/s, done.
+Total 4 (delta 1), reused 0 (delta 0)
+To https://github.com/jadekler/git-misc.git
+   8bfcfea..7c91650  newbranch -> newbranch
+    </pre>
+</div>
+<div class="jdk-paragraph">
+    <h4>Git Merge <small>Feels like <strong>svn merge</strong></small></h4>
+    Commands
+    <pre>
+git checkout master
+git merge [branch name]
+git push
+    </pre>
+    Example
+    <pre>
+[jeand@Jeans-MacBook-Pro-2:/Applications/XAMPP/htdocs/git-misc]$ git checkout master
+Switched to branch 'master'
+[jeand@Jeans-MacBook-Pro-2:/Applications/XAMPP/htdocs/git-misc]$ git merge newbranch
+Updating 8bfcfea..7c91650
+Fast-forward
+ test/index.html | 2 ++
+ 1 file changed, 2 insertions(+)
+[jeand@Jeans-MacBook-Pro-2:/Applications/XAMPP/htdocs/git-misc]$ git push
+Total 0 (delta 0), reused 0 (delta 0)
+To https://github.com/jadekler/git-misc.git
+   8bfcfea..7c91650  master -> master
+    </pre>
+</div>
