@@ -41,11 +41,11 @@ To https://github.com/jadekler/git-misc.git
     </pre>
 </div>
 <div class="jdk-paragraph">
-    <h2>Git Pull Conflicts</h2>
+    <h4>Git Pull Conflicts</h4>
     Sometimes when you pull you will get a message like "Your local changes to the following files would be overwritten by merge. Please, commit your changes or stash them before you can merge." There are two ways to deal with this: discarding your changes and pulling, stashing your changes and pulling or commiting your changes, fixing conflicts, and pulling. Let's briefly walk through these three options.
 </div>
 <div class="jdk-paragraph">
-    <h2>Git Pull Conflicts - Discard Changes</h2>
+    <h4>Git Pull Conflicts - Discard Changes</h4>
     <pre>
 # Here you see a pull method. You choose to (a) discard your changes
 git pull
@@ -79,7 +79,7 @@ Fast-forward
     </pre>
 </div>
 <div class="jdk-paragraph">
-    <h2>Git Pull Conflicts - Merge Changes</h2>
+    <h4>Git Pull Conflicts - Merge Changes</h4>
     Commands
     <pre>
 # Here you see a pull method. You choose to (b) merge your changes
@@ -137,7 +137,7 @@ To https://github.com/jadekler/git-misc.git
     </pre>
 </div>
 <div class="jdk-paragraph">
-    <h2>Git Pull Conflicts - Stash Changes</h2>
+    <h4>Git Pull Conflicts - Stash Changes</h4>
     <pre>
 # Here you see a pull method. You choose to (c) stash your changes
 git pull
