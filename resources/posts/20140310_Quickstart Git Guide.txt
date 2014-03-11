@@ -1,0 +1,3 @@
+<div class="jdk-paragraph">
+    This post will serve as a quick, functional guide to jumping into git as well as a refresher for those who've used it before. I will use some examples from SVN as comparison.
+</div>
