@@ -8458,6 +8458,7 @@ html, body {
 }
 
 .jdk-footer {
+  background-color: white;
   text-align: center;
   padding-top: 5px;
   border-top: 1px solid #e7e7e7;
@@ -8480,6 +8481,10 @@ html, body {
 }
 .jdk-showcase .jdk-leftnav {
   padding-left: 0;
+}
+
+body {
+  background-image: url("/static/img/crossword.png");
 }
 
 .jdk-main {
