@@ -9,10 +9,10 @@ You will need:
 
 To build:
 
-go build main.go
+    go build main.go
 
 To run:
 
-./main
+    ./main
 
-http://localhost::8080
+Open [http://localhost:8080](http://localhost:8080/) in your browser.
