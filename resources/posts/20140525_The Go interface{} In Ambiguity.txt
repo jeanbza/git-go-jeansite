@@ -1,5 +1,5 @@
 <div class="jdk-paragraph">
-    As many of you may be aware, the interface{} type (and yes, it can and is often a type) is basically Go's way of placeholding a spot for ANY other type. That is, it is an interface for any type. As a result, following code works perfectly fine:
+    As many of you may be aware, the interface{} type is basically Go's way of placeholding a spot for ANY other type. As a result, following code works perfectly fine:
     <pre>
 package main
 
