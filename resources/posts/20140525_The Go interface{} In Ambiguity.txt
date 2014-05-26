@@ -1,0 +1,71 @@
+<div class="jdk-paragraph">
+    As many of you may be aware, the interface{} type (and yes, it can and is often a type) is basically Go's way of placeholding a spot for ANY other type. That is, it is an interface for any type. As a result, following code works perfectly fine:
+    <pre>
+package main
+
+import (
+    "log"
+)
+
+func loggit(loggableItem interface{}) {
+    log.Println(loggableItem)
+}
+
+func main() {
+    loggit(5)
+    loggit("five")
+}
+    </pre>
+</div>
+<div class="jdk-paragraph">
+    That's cool, but what if I'm working in the loggit function without any knowledge of the types of things coming in? How would I go about finding the <strong>actual</strong> type of the interface{} variable? Well, with the handy reflect package, we can simply do the following:
+    <pre>
+package main
+
+import (
+    "log"
+    "reflect"
+)
+
+func loggit(loggableItem interface{}) {
+    log.Println(reflect.TypeOf(loggableItem))
+    log.Println(loggableItem)
+}
+
+func main() {
+    loggit(5)
+    loggit("five")
+}
+    </pre>
+</div>
+<div class="jdk-paragraph">
+    Awesome! Now, how about using those types? There is one more shortcut with this: when you switch something like an interface{}, you can simply use the following switch shorthand:
+    <pre>
+package main
+
+import (
+    "log"
+    "reflect"
+)
+
+func loggit(loggableItem interface{}) {
+    switch loggableItem.(type) {
+        case int:
+            log.Println("This is an int!")
+        case string:
+            log.Println("This is a string!")
+    }
+
+    log.Println(reflect.TypeOf(loggableItem))
+    log.Println(loggableItem)
+}
+
+func main() {
+    loggit(5)
+    loggit("five")
+}
+    </pre>
+</div>
+<div class="jdk-paragraph">
+    And, of course, all the above applies to your own structures as well as the int and string that I've used here for example. I hope this has been helpful!
+</div>
