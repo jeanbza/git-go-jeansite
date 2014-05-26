@@ -8397,12 +8397,14 @@ code {
 }
 
 pre {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  padding-top: 10px;
+  padding-bottom: 0;
   padding-right: 0;
   padding-left: 10px;
   font-size: 10px;
   line-height: 12px;
-  margin-top: 0;
-  margin-bottom: 10px;
   max-height: 300px;
   overflow-y: scroll;
 }
