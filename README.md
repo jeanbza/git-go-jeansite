@@ -3,16 +3,7 @@ git-go-jeansite
 
 This is my website written in go.
 
-You will need:
-- Go
-- Git
+To view:
 
-To build:
-
-    go build main.go
-
-To run:
-
-    ./main
-
-Open [http://localhost:8080](http://localhost:8080/) in your browser.
+1. `go run main.go`
+1. Open [http://localhost:8080](http://localhost:8080/) in your browser.
