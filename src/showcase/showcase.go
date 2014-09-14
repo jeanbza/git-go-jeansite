@@ -39,6 +39,8 @@ func GetPage(rw http.ResponseWriter, req *http.Request) {
                 loadD3ConcertsShowcase(rw)
             case "circle_wave":
                 loadCircleWaveShowcase(rw)
+            case "logictree":
+                loadLogictreeShowcase(rw)
         }
     }
 }
@@ -163,5 +165,22 @@ func loadCircleWaveShowcase(rw http.ResponseWriter) {
 
     tmpl := make(map[string]*template.Template)
     tmpl["showcase.html"] = template.Must(template.ParseFiles("resources/html/showcase.html", "resources/html/index.html", "resources/showcases/circle_wave/showcase.html"))
+    tmpl["showcase.html"].ExecuteTemplate(rw, "base", p)
+}
+
+func loadLogictreeShowcase(rw http.ResponseWriter) {
+    type ShowCase struct {}
+
+    type Page struct {
+        Title               string
+        CurrentShowcase     string
+        ShowCase            ShowCase
+    }
+
+    s := ShowCase{}
+    p := Page{Title: "showcase", CurrentShowcase: "logictree", ShowCase: s}
+
+    tmpl := make(map[string]*template.Template)
+    tmpl["showcase.html"] = template.Must(template.ParseFiles("resources/html/showcase.html", "resources/html/index.html", "resources/showcases/logictree/showcase.html"))
     tmpl["showcase.html"].ExecuteTemplate(rw, "base", p)
 }
