@@ -1,0 +1,101 @@
+{{define "showcase"}}
+    <script type="text/javascript">
+        var main = function() {
+            var timeout = 200;
+            var allCirclesFinished = [];
+
+            moveCircles(false);
+            
+            function moveCircles(up) {
+                $(".circle").each(function(j) {
+                    var self = $(this);
+                    var promiseToFinish = new $.Deferred();
+                    allCirclesFinished.push(promiseToFinish);
+                    setTimeout(function() {moveCircle(self, 0, up, promiseToFinish);}, timeout*j);
+                });
+
+                $.when.apply($, allCirclesFinished).then(function() {
+                    allCirclesFinished = [];
+                    moveCircles(!up);
+                });
+            }
+
+            function moveCircle(elem, i, up, promise) {
+                var marginTop = elem.css('margin-top').substring(0, elem.css('margin-top').length-2);
+
+                if (up) {
+                    elem.css('margin-top', parseInt(marginTop)-20+'px');
+                } else {
+                    elem.css('margin-top', parseInt(marginTop)+20+'px');
+                }
+                
+                i++;
+
+                if (i < 15) {
+                    setTimeout(function() {moveCircle(elem, i, up, promise);}, 50)
+                } else {
+                    promise.resolve();
+                }
+            }
+        };
+
+        $(document).ready(main);
+    </script>
+
+    <style>
+        html {
+            height: 100%;
+        }
+
+        body {
+            height: 100%;
+        }
+
+        .circles-area {
+            height: 370px;
+            padding: 10px;
+            background-color: white;
+        }
+
+        .circle {
+            width: 50px;
+            height: 50px;
+            position: fixed;
+            border-radius: 50px;
+        }
+
+        .mint-circle {
+            left: 30%;
+            background-color: red;
+        }
+
+        .green-circle {
+            left: 40%;
+            background-color: blue;
+        }
+
+        .blue-circle {
+            left: 50%;
+            background-color: green;
+        }
+
+        .purple-circle {
+            left: 60%;
+            background-color: orange;
+        }
+
+        .navy-circle {
+            left: 70%;
+            background-color: purple;
+        }
+    </style>
+
+    <a href="https://github.com/jadekler/git-misc/tree/master/circles-wave" target="_blank">Source code here.</a><br><br>
+    <div class="circles-area">
+        <div class="circle mint-circle"></div>
+        <div class="circle green-circle"></div>
+        <div class="circle blue-circle"></div>
+        <div class="circle purple-circle"></div>
+        <div class="circle navy-circle"></div>
+    </div>
+{{end}}

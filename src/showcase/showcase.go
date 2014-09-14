@@ -37,6 +37,8 @@ func GetPage(rw http.ResponseWriter, req *http.Request) {
                 loadJqueryTreetableShowcase(rw)
             case "d3_concerts":
                 loadD3ConcertsShowcase(rw)
+            case "circle_wave":
+                loadCircleWaveShowcase(rw)
         }
     }
 }
@@ -144,5 +146,22 @@ func loadEmberWidgetShowcase(rw http.ResponseWriter) {
 
     tmpl := make(map[string]*template.Template)
     tmpl["showcase.html"] = template.Must(template.ParseFiles("resources/html/showcase.html", "resources/html/index.html", "resources/showcases/ember_widget/showcase.html"))
+    tmpl["showcase.html"].ExecuteTemplate(rw, "base", p)
+}
+
+func loadCircleWaveShowcase(rw http.ResponseWriter) {
+    type ShowCase struct {}
+
+    type Page struct {
+        Title               string
+        CurrentShowcase     string
+        ShowCase            ShowCase
+    }
+
+    s := ShowCase{}
+    p := Page{Title: "showcase", CurrentShowcase: "circle_wave", ShowCase: s}
+
+    tmpl := make(map[string]*template.Template)
+    tmpl["showcase.html"] = template.Must(template.ParseFiles("resources/html/showcase.html", "resources/html/index.html", "resources/showcases/circle_wave/showcase.html"))
     tmpl["showcase.html"].ExecuteTemplate(rw, "base", p)
 }
