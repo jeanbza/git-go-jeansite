@@ -1,0 +1,21 @@
+<div class="jdk-paragraph">
+    Lately, the Denver Pivotal Labs office has undergone a <a href="http://ethanschoonover.com/solarized" target="_blank">Solarized Theme</a> surge - all of our IDEs and terminals have all been swept by the light, eye-calming tan wave. A colleague and I decided to take it a step further while a couple of rather long tests were running. Here you have it: how to solarize your chrome developer tools! Note: you can also see this <a href="https://github.com/jadekler/solarized-chrome-devtools" target="_blank">at my GitHub</a>.
+</div>
+<div class="jdk-paragraph">
+    <ul>
+        <li>git clone https://github.com/jadekler/solarized-chrome-devtools.git to some location</li>
+        <li>Open chrome, and navigate to chrome://flags/</li>
+        <li>Search for 'Enable Developer Tools experiments', and click 'Enable'</li>
+        <li>Restart chrome</li>
+        <li>Go to developer settings (CMD+ALT+I on Mac)</li>
+        <li>Click the settings icon (a small cog)</li>
+        <li>Click 'experiments', and then enable 'Allow Custom UI Themes'</li>
+        <li>Navigate to chrome://extensions/</li>
+        <li>Click 'Developer Mode' at the top right</li>
+        <li>Click 'Load unpackaged extensions' and select the folder your cloned in step 1</li>
+        <li>Open dev tools again - no reload needed - and your changes should be there!</li>
+    </ul>
+</div>
+<div class="jdk-paragraph">
+    <img src="/static/img/solarized.png" width=100%>
+</div>
