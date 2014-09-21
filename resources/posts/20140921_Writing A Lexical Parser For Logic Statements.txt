@@ -1,0 +1,47 @@
+<div class="jdk-paragraph">
+    As programmers, we frequently write logic statements: A && B, (A != C) || D, A NOT EQUAL TO F AND B NOT IN (C,D,E), and so on. These high-level statements get interpreted by a parser as part of the compiler and typically get turned into low-level language understandable in the target language. This is because it's generally easy to write things like A && B, rather than something like:
+    <pre>
+MOVE _x, R7
+COMPARE _y, R7
+    </pre>
+</div>
+<div class="jdk-paragraph">
+    But, what if we take this one step further? Let's write a language that non-programmers can read, and parse it into language that something like MySQL could understand. This could be useful if you want to provide users of your app the ability to organically search through a large dataset, for instance.
+</div>
+<div class="jdk-paragraph">
+    So, the first thing we need to do is define our human-readable language. Let's make it simple: A eq B, A neq B, (A eq B and A neq C) or A eq D. So, a couple of equality operators (eq, neq) and a couple of logical operators (and, or). Simple enough.
+</div>
+<div class="jdk-paragraph">
+    Now, let's see what we want our target language to look like:
+    <ul>
+        <li>A eq B should become A = B in mysql</li>
+        <li>A neq B should become A != B</li>
+        <li>(A eq B and A neq C) or A eq D should become (A = B AND A != C) OR A = D in mysql</li>
+    </ul>
+</div>
+<div class="jdk-paragraph">
+    A pretty simple example, but to a non-programmer we may have already crossed the 'eyes-glazed' line, and certainly would if we threw in things like BETWEEN, COALESCE, IN, CONTAINS. Even then we might still have some non-programmers who'd be able to follow along, but mysql is an easy target language. A target language like C, Go, or Java would probably not do as well.
+</div>
+<div class="jdk-paragraph">
+    Anyways, let's talk about implementing this parser. In our above example, all we need to do is define a grammar: eq becomes =, and becomes AND, and so on. This is simple enough and done quickly with string replace functions. 
+</div>
+<div class="jdk-paragraph">
+    What if we wanted to keep these statements in memory, and then modify parts of it as we go? Or, what if we wanted to add an optimization step that removes duplicate conditions?
+</div>
+<div class="jdk-paragraph">
+    Suddenly our problem is no longer solved by keeping the human-readable conditions in one string that simply gets string replaced upon. We need to define a slightly more robust way to hold our conditions.
+</div>
+<div class="jdk-paragraph">
+    The data structure that has probably already occurred to the reader is an n-width tree, where each branch is a logical condition (and, or, xor, etc) and each leaf an equality condition (A eq B, D neq K, etc). Building this tree from something like (A eq B and A neq C) or A eq D is surprisingly easy: we start at a root node, recurse down a level into the children of the node for each opening paren we see, recurse up a parent for each closing paren we see, and assign to the children each time we see a condition. See below an example of what this might look like:
+    <br><br>
+    <img src="https://camo.githubusercontent.com/4281db2b742e0877a122b90cd5b021d903a5137f/68747470733a2f2f7261772e6769746875622e636f6d2f6a6164656b6c65722f6769742d676f2d6c6f676963747265652f6d61737465722f6c6f676963747265652d7374617469632f696d616765732f747265652e706e67" width=60%>
+</div>
+<div class="jdk-paragraph">
+    This approach runs through the human-readable once only, and touches each node only once (barring recurses up and down) - therefore, we have a speedy O(n) time method for creating our data structure, which is also conveniently stored in O(n) space. Converting our tree back to human-readable conditions (stringifying the tree) is as simple as traversing the tree post-order. We do the same for converting our tree to target language, with the added step of applying our grammar at each node. Simplicity!
+</div>
+<div class="jdk-paragraph">
+    Now, when we wish to modify our conditions, we simply modify the tree representation, stringify the tree, and give it back to the user. No problem!
+</div>
+<div class="jdk-paragraph">
+    To see this in action, as well as to see how you might store this tree in mysql for persistance, check out my example <a href="https://github.com/jadekler/git-go-logictree/" target="_blank">here</a>.
+</div>
