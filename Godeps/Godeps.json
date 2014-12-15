@@ -1,0 +1,23 @@
+{
+	"ImportPath": "git-go-jeansite",
+	"GoVersion": "go1.3.1",
+	"Deps": [
+		{
+			"ImportPath": "github.com/go-sql-driver/mysql",
+			"Comment": "v1.2-1-g7094cf0",
+			"Rev": "7094cf0331ed6bde3cd75aa5d1da0e7764b526c9"
+		},
+		{
+			"ImportPath": "github.com/golang/glog",
+			"Rev": "d1c4472bf2efd3826f2b5bdcc02d8416798d678c"
+		},
+		{
+			"ImportPath": "github.com/jadekler/git-go-logictree/app/common",
+			"Rev": "795945538cad5fed274a01b10ed540ff77fbfe24"
+		},
+		{
+			"ImportPath": "github.com/jadekler/git-go-logictree/app/home",
+			"Rev": "795945538cad5fed274a01b10ed540ff77fbfe24"
+		}
+	]
+}
